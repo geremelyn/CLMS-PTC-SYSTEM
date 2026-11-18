@@ -1,0 +1,42 @@
+.clms-dialog-backdrop{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:20px;background:rgba(11,25,20,.58);backdrop-filter:blur(4px)}
+.clms-dialog{width:min(100%,440px);padding:26px;border:1px solid rgba(255,255,255,.35);border-radius:18px;background:#0a6b4a;color:#fff;box-shadow:0 24px 80px rgba(0,0,0,.28);animation:clms-dialog-in .14s ease-out}
+.clms-dialog-mark{display:grid;place-items:center;width:38px;height:38px;margin-bottom:14px;border-radius:50%;background:#e4f4e9;color:#17633e;font-size:21px;font-weight:800}
+.clms-dialog h2{margin:0 0 9px;font-size:1.18rem;line-height:1.35;color:#18352a}
+.clms-dialog p{margin:0 0 20px;color:#52665c;line-height:1.55;white-space:pre-line}
+.clms-dialog input{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #cbd8d0;border-radius:9px;background:#fff;color:#172c22;font:inherit;outline:none}
+.clms-dialog input:focus{border-color:#288454;box-shadow:0 0 0 3px rgba(40,132,84,.14)}
+.clms-dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
+.clms-dialog-actions button{min-height:40px;padding:9px 16px;border-radius:9px;font:inherit;font-weight:650;cursor:pointer}
+.clms-dialog-secondary{border:1px solid #d5dfd8;background:#fff;color:#30483b}
+.clms-dialog-primary{border:1px solid #187747;background:#187747;color:#fff}
+.clms-dialog-primary.danger{border-color:#b52f36;background:#b52f36}
+.clms-dialog-primary:disabled{opacity:.5;cursor:not-allowed}
+@keyframes clms-dialog-in{from{opacity:.5;transform:translateY(5px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.clms-dialog{animation:none}}
+
+/* Green confirmation dialog (no icon), consistent with the shared theme */
+.clms-dialog h2{color:#fff}.clms-dialog p{color:rgba(255,255,255,.88)}
+.clms-dialog input{background:#064b36;color:#fff;border-color:rgba(255,255,255,.25)}.clms-dialog input::placeholder{color:rgba(255,255,255,.6)}
+.clms-dialog input:focus{border-color:#9be5c7;box-shadow:0 0 0 3px rgba(155,229,199,.25)}
+.clms-dialog-secondary{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff}
+.clms-dialog-primary{border:1px solid #fff;background:#fff;color:#0a6b4a}
+.clms-dialog-primary.danger{border-color:#ffd4d4;background:#b52f36;color:#fff}
+.clms-undo-backdrop{position:fixed;inset:0;z-index:5100;display:flex;align-items:center;justify-content:center;background:rgba(10,20,15,.35);padding:16px}
+.clms-undo-popup{position:relative;width:min(92vw,460px);max-height:86vh;overflow:auto;padding:24px 24px 20px;border-radius:16px;background:#fff;color:#12261c;border:1px solid #cfe3d8;border-top:6px solid #0a6b4a;box-shadow:0 24px 70px rgba(0,0,0,.4);text-align:center}
+.clms-undo-popup.error{border-top-color:#8a2a30}
+.clms-undo-popup h2{margin:0 0 10px;font-size:20px}
+.clms-undo-message{margin:0 0 16px;font-size:14px;line-height:1.5;white-space:pre-line;text-align:left;word-break:break-word}
+.clms-undo-actions{display:flex;justify-content:center;gap:10px}
+.clms-undo-action{border:0;border-radius:10px;background:#0a6b4a;color:#fff;padding:10px 22px;font-weight:700;font-size:14px;cursor:pointer}.clms-undo-action:disabled{opacity:.6;cursor:wait}
+.clms-undo-close{position:absolute;top:8px;right:10px;width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:#4a5a52;font-size:24px;line-height:1;cursor:pointer}.clms-undo-close:hover{background:#eef4f0}
+/* CP50: result popup (delete / restore / success / error) uses the same dark green as the confirmation dialog above. */
+.clms-undo-popup{background:#0a6b4a;color:#fff;border:1px solid rgba(255,255,255,.35);border-top:6px solid #9be5c7;box-shadow:0 24px 80px rgba(0,0,0,.28)}
+.clms-undo-popup.error{border-top-color:#ff9b9b}
+.clms-undo-popup h2{color:#fff}.clms-undo-message{color:rgba(255,255,255,.92)}
+.clms-undo-action{border:1px solid #fff;background:#fff;color:#0a6b4a}
+.clms-undo-close{color:#fff}.clms-undo-close:hover{background:rgba(255,255,255,.18)}
+/* CP51: confirmation / success / delete / restore / error popups = the same dark green glass as the Add Computer modal. */
+.clms-dialog-backdrop,.clms-undo-backdrop{background:var(--clms-popup-backdrop,rgba(3,18,12,.7));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.clms-dialog,.clms-undo-popup{background:var(--clms-popup-bg,rgba(5,42,30,.72));border:var(--clms-popup-border,1px solid rgba(255,255,255,.28));border-radius:var(--clms-popup-radius,20px);box-shadow:var(--clms-popup-shadow,0 30px 80px rgba(3,18,12,.5));-webkit-backdrop-filter:var(--clms-popup-blur,blur(22px));backdrop-filter:var(--clms-popup-blur,blur(22px))}
+.clms-undo-popup{border-top:6px solid #9be5c7}.clms-undo-popup.error{border-top-color:#ff9b9b}
+@media print{.clms-undo-backdrop,.clms-dialog-backdrop{display:none!important}}

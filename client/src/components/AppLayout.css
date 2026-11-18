@@ -1,0 +1,268 @@
+:root {
+  --clms-ink: oklch(98% 0.01 160);
+  --clms-ink-soft: oklch(91% 0.02 160);
+  --clms-ink-muted: oklch(82% 0.03 160);
+  --clms-panel: rgba(255,255,255,.16);
+  --clms-panel-deep: rgba(5,42,30,.72);
+  --clms-line: rgba(255,255,255,.28);
+  --clms-line-soft: rgba(255,255,255,.16);
+  --clms-green: oklch(58% .13 163);
+  --clms-green-bright: oklch(72% .13 163);
+  --clms-ease: cubic-bezier(.16,1,.3,1);
+  --clms-font: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+.clms-app-shell {
+  min-height: 100vh;
+  width: 100%;
+  padding: 22px 28px 28px;
+  color: var(--clms-ink);
+  background:
+    linear-gradient(120deg, rgba(5,39,25,.90), rgba(7,48,34,.78), rgba(8,22,17,.68)),
+    url('/schoolbg.jpg') center / cover fixed no-repeat;
+  font-family: var(--clms-font);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.clms-header {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 78px;
+  padding: 12px 22px;
+  border: 1px solid var(--clms-line);
+  border-radius: 19px;
+  background: rgba(255,255,255,.16);
+  box-shadow: 0 15px 40px rgba(6,24,16,.30);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.clms-brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--clms-ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.clms-brand-logo {
+  display: grid;
+  place-items: center;
+  width: 53px;
+  height: 53px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: oklch(98% .01 160);
+  box-shadow: 0 5px 15px rgba(6,24,16,.25);
+}
+
+.clms-brand-logo img { width: 100%; height: 100%; object-fit: contain; }
+.clms-brand-copy { display:flex; flex-direction:column; }
+.clms-brand-copy strong { margin:0; font-size:24px; line-height:1.15; font-weight:750; letter-spacing:.02em; }
+.clms-brand-copy small { margin-top:4px; color:var(--clms-ink-soft); font-size:13px; line-height:1.35; }
+
+.clms-user-chip {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:6px 8px 6px 6px;
+  border-radius:15px;
+  background:rgba(255,255,255,.10);
+}
+.clms-user-avatar { display:grid; place-items:center; width:44px; height:44px; border-radius:50%; background:oklch(97% .01 160); color:oklch(35% .12 305); font-size:20px; }
+.clms-user-copy { display:flex; flex-direction:column; padding-right:5px; }
+.clms-user-copy strong { color:var(--clms-ink); font-size:14px; font-weight:650; }
+.clms-user-copy small { margin-top:4px; color:var(--clms-ink-soft); font-size:13px; line-height:1.35; }
+
+.clms-layout { display:flex; gap:22px; min-height:calc(100vh - 165px); margin-top:20px; }
+.clms-sidebar {
+  width:245px;
+  min-height:625px;
+  flex:0 0 245px;
+  align-self:flex-start;
+  padding:24px 15px;
+  border:1px solid var(--clms-line);
+  border-radius:19px;
+  background:var(--clms-panel-deep);
+  box-shadow:0 15px 40px rgba(6,24,16,.25);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.clms-menu-title { padding:0 13px 14px; color:var(--clms-ink-muted); font-size:12px; font-weight:750; letter-spacing:.14em; text-align:center; }
+.clms-menu { display:flex; flex-direction:column; gap:7px; }
+.clms-menu-item {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  width:100%;
+  min-height:50px;
+  padding:0 14px;
+  border:1px solid transparent;
+  border-radius:12px;
+  background:transparent;
+  color:var(--clms-ink-soft);
+  font-family:var(--clms-font);
+  font-size:14px;
+  font-weight:550;
+  line-height:1.5;
+  text-decoration:none;
+  text-align:left;
+  cursor:pointer;
+  transition:background .2s ease, border-color .2s ease, color .2s ease;
+}
+.clms-menu-item:hover,.clms-menu-item:focus-visible { border-color:var(--clms-line-soft); outline:none; background:rgba(255,255,255,.15); color:var(--clms-ink); }
+.clms-menu-item.active { border-color:rgba(255,255,255,.20); background:var(--clms-green); box-shadow:0 8px 20px rgba(6,24,16,.20); color:var(--clms-ink); }
+.clms-menu-dot { width:5px; height:5px; flex:0 0 5px; border-radius:50%; background:currentColor; opacity:.65; }
+.clms-menu-divider { width:90%; height:1px; margin:24px auto; background:var(--clms-line-soft); }
+.clms-logout { color:var(--clms-ink-soft); }
+.clms-logout:hover,.clms-logout:focus-visible { border-color:rgba(255,160,160,.28); background:rgba(180,50,50,.30); }
+
+.clms-main { flex:1; min-width:0; padding:17px 20px 25px; }
+.clms-footer { padding:22px 20px 4px; text-align:center; color:var(--clms-ink-soft); font-size:11px; opacity:.62; }
+
+/* Phase A compatibility layer: the existing page content remains intact, while
+   its old page shell is visually suppressed so the shared shell above owns the UI. */
+.clms-main .dashboard-header,
+.clms-main .dashboard-sidebar,
+.clms-main .dashboard-overlay,
+.clms-main .reservation-header,
+.clms-main .reservation-sidebar,
+.clms-main .reservation-overlay,
+.clms-main .my-reservations-header,
+.clms-main .my-reservations-sidebar,
+.clms-main .my-reservations-overlay,
+.clms-main .maintenance-header,
+.clms-main .maintenance-sidebar,
+.clms-main .maintenance-overlay,
+.clms-main .approved-classes-header,
+.clms-main .approved-sidebar,
+.clms-main .approved-classes-overlay,
+.clms-main .change-password-header,
+.clms-main .change-password-sidebar,
+.clms-main .change-password-overlay,
+.clms-main .equipment-header,
+.clms-main .equipment-sidebar,
+.clms-main .equipment-overlay,
+.clms-main .equipment-footer,
+.clms-main .reports-header,
+.clms-main .reports-sidebar,
+.clms-main .reports-overlay,
+.clms-main .audit-header,
+.clms-main .audit-sidebar,
+.clms-main .audit-overlay,
+.clms-main .report-issue-header,
+.clms-main .report-issue-sidebar,
+.clms-main .report-issue-overlay { display:none !important; }
+
+.clms-main .users-page,
+.clms-main .laboratories-page,
+.clms-main .computers-page,
+.clms-main .reservation-page,
+.clms-main .my-reservations-page,
+.clms-main .maintenance-page,
+.clms-main .approved-classes-page,
+.clms-main .change-password-page,
+.clms-main .equipment-page,
+.clms-main .reports-page,
+.clms-main .audit-page,
+.clms-main .report-issue-page {
+  width:100% !important;
+  min-height:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  background:transparent !important;
+  color:var(--clms-ink) !important;
+}
+
+.clms-main .dashboard-content,
+.clms-main .reservation-layout,
+.clms-main .my-reservations-layout,
+.clms-main .maintenance-layout,
+.clms-main .approved-classes-content,
+.clms-main .change-password-layout,
+.clms-main .equipment-layout { display:block !important; min-height:auto !important; margin:0 !important; }
+
+.clms-main .users-main,
+.clms-main .laboratories-main,
+.clms-main .computers-main,
+.clms-main .reservation-content,
+.clms-main .my-reservations-content,
+.clms-main .maintenance-main,
+.clms-main .approved-classes-main,
+.clms-main .change-password-content,
+.clms-main .equipment-main { width:100% !important; min-width:0 !important; padding:0 !important; }
+
+/* The shared shell owns the application-level typography. Page-specific
+   selectors may still style their own controls, but inherit the same family. */
+.clms-main, .clms-main * { font-family:var(--clms-font); }
+
+@media (max-width: 1050px) {
+  .clms-app-shell { padding:16px; }
+  .clms-sidebar { width:220px; flex-basis:220px; }
+}
+@media (max-width: 850px) {
+  .clms-layout { flex-direction:column; }
+  .clms-sidebar { width:100%; min-height:auto; flex-basis:auto; }
+  .clms-menu { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .clms-menu-divider { grid-column:1/-1; }
+  .clms-main { padding:0 4px 20px; }
+}
+@media (max-width: 560px) {
+  .clms-app-shell { padding:10px; }
+  .clms-header { min-height:68px; padding:10px 14px; }
+  .clms-brand-copy small { display:none; }
+  .clms-user-copy { display:none; }
+  .clms-menu { grid-template-columns:1fr; }
+}
+@media print {
+  .clms-app-shell { padding:0; background:white !important; color:#111 !important; }
+  .clms-header,.clms-sidebar,.clms-footer { display:none !important; }
+  .clms-main { padding:0 !important; }
+}
+
+/* Consistent, readable select controls across MIS, Dean, Teacher, and Inventory pages. */
+.clms-main select{color:#173b2d;background-color:#f7fbf8;border-color:rgba(20,80,55,.24);}
+.clms-main select option{color:#173b2d;background:#fff;}
+.clms-main input[type="date"],.clms-main input[type="time"],.clms-main input[type="text"],.clms-main input[type="search"]{color:#173b2d;}
+.clms-main .th-filter select,.clms-main th select{display:block;max-width:100%;min-width:92px;margin-top:6px;padding:6px 8px;border:1px solid rgba(255,255,255,.25);border-radius:8px;background:#f7fbf8;color:#173b2d;font-size:11px;font-weight:600;letter-spacing:0;text-transform:none;}
+
+.clms-role-inventory-staff .clms-menu-maintenance.active{background:#168b67!important;border-color:rgba(255,255,255,.22)!important}
+
+/* Keep the approved role-specific dashboard imagery inside the shared application shell. */
+
+/* General form-entry treatment requested for all dashboards: dark green fields with white typed text. */
+.clms-main input:not([type="checkbox"]):not([type="radio"]),.clms-main textarea{background:#064b36!important;color:#fff!important;border:1px solid rgba(180,255,221,.32)!important;caret-color:#fff!important;}
+.clms-main input::placeholder,.clms-main textarea::placeholder{color:rgba(255,255,255,.62)!important;opacity:1;}
+.clms-main input:focus,.clms-main textarea:focus{outline:2px solid rgba(97,233,174,.65);outline-offset:1px;}
+.clms-main input[type="date"]::-webkit-calendar-picker-indicator,.clms-main input[type="time"]::-webkit-calendar-picker-indicator{filter:invert(1);}
+.clms-main .clms-menu-reservations.active{background:#168b67!important;border-color:rgba(255,255,255,.22)!important}
+/* Prevent accidental horizontal layout expansion; individual table wrappers may scroll when needed. */
+.clms-main{overflow-x:hidden}
+
+.password-required-backdrop { position:fixed; inset:0; z-index:1000; display:grid; place-items:center; padding:24px; background:rgba(0,16,10,.78); backdrop-filter:blur(5px); }
+.password-required-modal { width:min(100%,460px); padding:30px; border:1px solid rgba(255,255,255,.25); border-radius:20px; background:#073d2c; color:#fff; box-shadow:0 24px 80px rgba(0,0,0,.5); }
+.password-required-modal h2 { margin:8px 0 12px; }
+.password-required-modal p { color:rgba(255,255,255,.82); }
+.password-required-modal button { margin-top:14px; min-width:110px; border:0; border-radius:10px; padding:12px 22px; background:#bfe9ce; color:#073d2c; font-weight:750; cursor:pointer; }
+
+/* Collapsible sidebar dropdown groups */
+.clms-menu-dropdown{display:flex;flex-direction:column;gap:5px}
+.clms-menu-toggle{width:100%;text-align:left;cursor:pointer;font:inherit;display:flex;align-items:center}
+.clms-menu-toggle>span:nth-child(2){flex:1}
+.clms-menu-caret{margin-left:auto;font-size:12px;opacity:.8}
+.clms-menu-dropdown.has-active>.clms-menu-toggle{border-color:rgba(255,255,255,.20)}
+.clms-menu-sub{display:flex;flex-direction:column;gap:5px;padding-left:16px}
+.clms-menu-subitem{font-size:.94em}

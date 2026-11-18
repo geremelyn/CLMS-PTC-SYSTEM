@@ -1,0 +1,681 @@
+* {
+    box-sizing:border-box;
+}
+.maintenance-page {
+    position:relative;
+    min-height:100vh;
+    padding:22px 28px 55px;
+    overflow-x:hidden;
+    color:var(--dashboard-ink);
+    background:url('/schoolbg.jpg') center/cover no-repeat;
+}
+.maintenance-overlay {
+    position:fixed;
+    inset:0;
+    z-index:0;
+    background:linear-gradient(120deg,rgba(5,39,25,.9),rgba(7,48,34,.78),rgba(8,22,17,.68));
+    pointer-events:none;
+}
+.maintenance-header,.maintenance-layout,.maintenance-footer {
+    position:relative;
+    z-index:2;
+}
+.maintenance-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:78px;
+    padding:12px 22px;
+    border:1px solid var(--dashboard-line);
+    border-radius:19px;
+    background:rgba(255,255,255,.16);
+    box-shadow:0 15px 40px rgba(6,24,16,.3);
+    backdrop-filter:blur(18px);
+}
+.maintenance-brand {
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:0;
+    border:0;
+    background:transparent;
+    color:inherit;
+    text-align:left;
+    cursor:pointer;
+}
+.maintenance-brand-logo {
+    display:grid;
+    place-items:center;
+    width:53px;
+    height:53px;
+    overflow:hidden;
+    border-radius:50%;
+    background:#f5faf7;
+}
+.maintenance-brand-logo img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+.maintenance-brand strong {
+    display:block;
+    font-size:24px;
+    line-height:1.15;
+}
+.maintenance-brand small,.maintenance-user small {
+    display:block;
+    margin-top:4px;
+    color:var(--dashboard-ink-soft);
+    font-size:13px;
+}
+.maintenance-user {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:6px 8px 6px 6px;
+    border-radius:15px;
+    background:rgba(255,255,255,.1);
+}
+.maintenance-avatar {
+    display:grid;
+    place-items:center;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:#f5faf7;
+    color:#354a78;
+    font-size:20px;
+}
+.maintenance-layout {
+    display:flex;
+    gap:22px;
+    min-height:calc(100vh - 100px);
+    margin-top:20px;
+}
+.maintenance-sidebar {
+    width:245px;
+    min-height:625px;
+    flex-shrink:0;
+    padding:24px 15px;
+    border:1px solid var(--dashboard-line);
+    border-radius:19px;
+    background:var(--dashboard-panel-deep);
+    box-shadow:0 15px 40px rgba(6,24,16,.25);
+    backdrop-filter:blur(18px);
+}
+.maintenance-sidebar-title {
+    padding:0 13px 14px;
+    color:var(--dashboard-ink-muted);
+    font-size:12px;
+    font-weight:750;
+    letter-spacing:.14em;
+    text-align:center;
+}
+.maintenance-nav-button {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    min-height:50px;
+    margin-bottom:7px;
+    padding:0 14px;
+    border:1px solid transparent;
+    border-radius:12px;
+    background:transparent;
+    color:var(--dashboard-ink-soft);
+    font-size:14px;
+    font-weight:550;
+    cursor:pointer;
+}
+.maintenance-nav-button:hover,.maintenance-nav-button:focus-visible {
+    border-color:var(--dashboard-line-soft);
+    background:rgba(255,255,255,.15);
+    color:var(--dashboard-ink);
+    outline:0;
+}
+.maintenance-nav-button.active {
+    border-color:rgba(255,255,255,.2);
+    background:var(--dashboard-green);
+    color:var(--dashboard-ink);
+}
+.maintenance-nav-button.logout:hover {
+    background:rgba(180,50,50,.3);
+}
+.maintenance-sidebar-divider {
+    width:90%;
+    height:1px;
+    margin:24px auto;
+    background:var(--dashboard-line-soft);
+}
+.maintenance-main {
+    flex:1;
+    min-width:0;
+    padding:17px 20px 25px;
+}
+.maintenance-heading {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:105px;
+    margin-bottom:24px;
+}
+.maintenance-heading > div {
+    width:100%;
+    text-align:center;
+}
+.maintenance-heading .maintenance-search {
+    position:absolute;
+    right:0;
+    bottom:0;
+}
+.maintenance-eyebrow {
+    margin:0 0 7px;
+    color:var(--dashboard-ink-muted);
+    font-size:12px;
+    font-weight:750;
+    letter-spacing:.14em;
+}
+.maintenance-heading h1 {
+    margin:0;
+    font-size:clamp(34px,4vw,52px);
+    line-height:1.05;
+    text-shadow:0 4px 18px rgba(6,24,16,.35);
+}
+.maintenance-heading p:last-child {
+    margin:10px 0 0;
+    color:var(--dashboard-ink-soft);
+    font-size:15px;
+}
+.maintenance-search {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    width:235px;
+    padding:0 12px;
+    border:1px solid var(--dashboard-line);
+    border-radius:10px;
+    background:rgba(255,255,255,.1);
+    color:var(--dashboard-ink-muted);
+}
+.maintenance-search input {
+    width:100%;
+    min-height:43px;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:var(--dashboard-ink);
+    font:inherit;
+}
+.maintenance-alert {
+    margin-bottom:16px;
+    padding:12px 16px;
+    border:1px solid rgba(255,255,255,.24);
+    border-radius:12px;
+    background:rgba(255,255,255,.14);
+}
+.maintenance-alert.error {
+    background:rgba(120,30,30,.32);
+    border-color:rgba(255,170,170,.45);
+}
+.maintenance-stats {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+    margin-bottom:18px;
+}
+.maintenance-stats>div {
+    padding:17px 19px;
+    border:1px solid var(--dashboard-line);
+    border-radius:16px;
+    background:rgba(255,255,255,.12);
+    box-shadow:0 15px 35px rgba(6,24,16,.14);
+}
+.maintenance-stats span {
+    display:block;
+    color:var(--dashboard-ink-muted);
+    font-size:13px;
+}
+.maintenance-stats strong {
+    display:block;
+    margin-top:3px;
+    font-size:31px;
+    line-height:1;
+}
+.maintenance-panel {
+    overflow:hidden;
+    margin-bottom:18px;
+    border:1px solid var(--dashboard-line);
+    border-radius:19px;
+    background:rgba(4,35,25,.56);
+    box-shadow:0 20px 50px rgba(6,24,16,.2);
+    backdrop-filter:blur(17px);
+}
+.maintenance-panel-heading {
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    padding:22px 23px;
+    border-bottom:1px solid var(--dashboard-line-soft);
+}
+.maintenance-panel-heading h2 {
+    margin:0;
+    font-size:21px;
+}
+.maintenance-panel-heading>span {
+    color:var(--dashboard-ink-muted);
+    font-size:13px;
+}
+.maintenance-table-wrap {
+    overflow-x:auto;
+}
+.maintenance-table {
+    width:100%;
+    min-width:920px;
+    border-collapse:collapse;
+}
+.maintenance-table th {
+    padding:14px 18px;
+    color:var(--dashboard-ink-muted);
+    font-size:11px;
+    text-align:left;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+}
+.maintenance-table td {
+    padding:16px 18px;
+    border-top:1px solid var(--dashboard-line-soft);
+    color:var(--dashboard-ink-soft);
+    font-size:14px;
+    vertical-align:middle;
+}
+.maintenance-table td strong,.maintenance-table td small {
+    display:block;
+}
+.maintenance-table td small {
+    margin-top:4px;
+    color:var(--dashboard-ink-muted);
+    font-size:12px;
+}
+.maintenance-issue {
+    max-width:260px;
+    line-height:1.45;
+}
+.maintenance-status {
+    display:inline-flex;
+    padding:5px 9px;
+    border-radius:999px;
+    background:rgba(119,203,151,.18);
+    color:#b4f0c9;
+    font-size:12px;
+    font-weight:700;
+    white-space:nowrap;
+}
+.maintenance-status.pending {
+    background:rgba(245,180,90,.2);
+    color:#ffd59b;
+}
+.maintenance-status.in-progress {
+    background:rgba(133,183,255,.18);
+    color:#c5dcff;
+}
+.maintenance-note-preview {
+    max-width:170px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.maintenance-resolved-label {
+    margin-top:9px;
+}
+.maintenance-update-button {
+    padding:8px 12px;
+    border:1px solid var(--dashboard-line);
+    border-radius:8px;
+    background:rgba(255,255,255,.09);
+    color:var(--dashboard-ink);
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+.maintenance-update-button:hover {
+    background:var(--dashboard-green);
+}
+.maintenance-empty {
+    padding:55px 20px;
+    color:var(--dashboard-ink-muted);
+    text-align:center;
+}
+.maintenance-modal-backdrop {
+    position:fixed;
+    inset:0;
+    z-index:10;
+    display:grid;
+    place-items:center;
+    padding:22px;
+    background:rgba(2,17,11,.7);
+    backdrop-filter:blur(8px);
+}
+.maintenance-modal {
+    width:min(520px,100%);
+    padding:25px;
+    border:1px solid var(--dashboard-line);
+    border-radius:20px;
+    background:rgba(5,42,30,.96);
+    box-shadow:0 25px 80px rgba(0,0,0,.38);
+}
+.maintenance-modal-header {
+    position: relative;
+    display: block;
+    margin-bottom: 22px;
+    text-align: center;
+}
+
+.maintenance-modal-header > div {
+    width: 100%;
+}
+
+.maintenance-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.maintenance-modal h2 {
+    margin:0;
+    font-size:28px;
+}
+.maintenance-modal-header p:last-child {
+    margin:7px 0 0;
+    color:var(--dashboard-ink-muted);
+    font-size:13px;
+}
+.maintenance-close {
+    width:36px;
+    height:36px;
+    border:1px solid var(--dashboard-line);
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    color:var(--dashboard-ink);
+    font-size:25px;
+    cursor:pointer;
+}
+.maintenance-modal form {
+    display:grid;
+    gap:16px;
+}
+.maintenance-modal label {
+    display:grid;
+    gap:7px;
+    color:var(--dashboard-ink-soft);
+    font-size:13px;
+    font-weight:650;
+}
+.maintenance-modal select {
+    width: 100%;
+    min-height: 43px;
+    padding: 0 12px;
+    border: 1px solid var(--dashboard-line);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--dashboard-ink);
+    font: inherit;
+    color-scheme: dark;
+}
+
+.maintenance-modal select option {
+    background: #153c30;
+    color: #f5faf7;
+}
+.maintenance-modal textarea {
+    padding-top:10px;
+    resize:vertical;
+}
+.maintenance-modal-actions {
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    padding-top:20px;
+    border-top:1px solid var(--dashboard-line-soft);
+}
+.maintenance-primary-button,.maintenance-secondary-button {
+    min-height:46px;
+    padding:0 18px;
+    border:1px solid transparent;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+.maintenance-primary-button {
+    background:var(--dashboard-green);
+    color:var(--dashboard-ink);
+}
+.maintenance-primary-button:disabled {
+    opacity:.45;
+    cursor:not-allowed;
+}
+.maintenance-secondary-button {
+    border-color:var(--dashboard-line);
+    background:rgba(255,255,255,.08);
+    color:var(--dashboard-ink-soft);
+}
+@media(max-width:1000px) {
+    .maintenance-page {
+        padding:18px 20px 50px;
+    }
+    .maintenance-sidebar {
+        width:205px;
+    }
+    .maintenance-main {
+        padding:15px 10px;
+    }
+    .maintenance-stats {
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+@media(max-width:760px) {
+    .maintenance-layout {
+        flex-direction:column;
+    }
+    .maintenance-sidebar {
+        display:flex;
+        flex-wrap:wrap;
+        width:100%;
+        min-height:auto;
+        gap:7px;
+        padding:14px;
+    }
+    .maintenance-sidebar-title,.maintenance-sidebar-divider {
+        display:none;
+    }
+    .maintenance-nav-button {
+        flex:1 1 150px;
+        margin:0;
+    }
+    .maintenance-main {
+        padding:10px 0;
+    }
+    .maintenance-heading {
+        align-items:stretch;
+        flex-direction:column;
+    }
+    .maintenance-heading > div {
+        text-align:center;
+    }
+    .maintenance-search {
+        position:static!important;
+        width:100%;
+        margin-top:18px;
+    }
+}
+@media(max-width:560px) {
+    .maintenance-page {
+        padding:12px 12px 45px;
+    }
+    .maintenance-header {
+        padding:10px 13px;
+    }
+    .maintenance-brand-logo {
+        width:43px;
+        height:43px;
+    }
+    .maintenance-brand small,.maintenance-user-info {
+        display:none;
+    }
+    .maintenance-avatar {
+        width:40px;
+        height:40px;
+    }
+    .maintenance-stats {
+        grid-template-columns:1fr 1fr;
+    }
+    .maintenance-panel-heading {
+        align-items:start;
+        flex-direction:column;
+    }
+    .maintenance-modal {
+        padding:20px;
+    }
+}
+.maintenance-page {
+    animation: dashboardFadeIn 0.8s ease-out both;
+}
+
+.maintenance-header {
+    animation: dashboardHeaderIn 0.7s var(--dashboard-ease) both;
+}
+
+.maintenance-sidebar {
+    animation: dashboardSidebarIn 0.8s var(--dashboard-ease) 0.15s both;
+}
+
+.maintenance-main {
+    animation: dashboardMainIn 0.8s var(--dashboard-ease) 0.2s both;
+}
+
+.maintenance-nav-button {
+    transition:
+        transform 0.25s var(--dashboard-ease),
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.maintenance-nav-button:hover,
+.maintenance-nav-button:focus-visible {
+    transform: translateY(2px);
+}
+.maintenance-th-filter{display:flex;flex-direction:column;gap:6px;min-width:105px;font-size:11px;font-weight:800}
+.maintenance-th-filter select{width:100%;max-width:170px;min-height:30px;padding:5px 7px;border-radius:8px;border:1px solid rgba(255,255,255,.24);background:#f7fbf8;color:#173b2d;font-size:11px;font-weight:600;letter-spacing:0;text-transform:none}
+.maintenance-heading{margin-bottom:16px!important}
+
+.maintenance-pagination{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:12px;padding:10px;font-size:12px;color:rgba(255,255,255,.82)}.maintenance-pagination select,.maintenance-pagination button{padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#064b36;color:#fff}.maintenance-pagination button{cursor:pointer}.maintenance-pagination button:disabled{opacity:.45;cursor:not-allowed}
+
+/* CP57: selection / bulk-delete controls (buttons reuse .maintenance-update-button and the shared .clms-delete-all style) */
+.maintenance-bulk-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px}
+.maintenance-select-cell{width:38px;text-align:center}
+.maintenance-select-cell input{width:16px;height:16px;cursor:pointer}
+
+/* CP83: Maintenance heading search + bulk-action bar alignment (CSS only).
+   - The search box was absolutely positioned at the heading's bottom-right with a fixed 235px width; between ~900px and ~1000px it sat on top of the
+     centred title. It now has its own row under the title, right-aligned with the table panel, wider, with fixed spacing above and below.
+   - Select All / Clear Selection used 31px tall buttons while Delete / Delete All were 34px (tops 2px apart) and the group hugged the left side.
+     All four now share one height and baseline, and the group is right-aligned like the action rows on the other pages. */
+.maintenance-heading { flex-direction: column; justify-content: center; align-items: stretch; min-height: 0; gap: 16px; }
+.maintenance-heading .maintenance-search { position: static; align-self: flex-end; box-sizing: border-box; width: min(360px, 100%); margin: 0; }
+@media (max-width: 760px) { .maintenance-heading .maintenance-search { align-self: stretch; width: 100%; } }
+.maintenance-bulk-bar { justify-content: flex-end; padding: 12px 14px; }
+.clms-app-shell .maintenance-bulk-bar .maintenance-update-button,
+.clms-app-shell .maintenance-bulk-bar .clms-delete-all { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: 36px; padding: 0 16px; font-size: 13px; line-height: 1; }
+
+/* CP84: MIS Staff's Maintenance page is not inside the .clms-app-shell wrapper, so the CP82 bulk-bar sizing (scoped to the shell) never applied
+   there: Select All / Clear Selection rendered 31px tall and Delete / Delete All 26px, on different baselines. Same sizing, unscoped. */
+.maintenance-bulk-bar .maintenance-update-button,
+.maintenance-bulk-bar .clms-delete-all { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: 36px; padding: 0 16px; font-size: 13px; line-height: 1; margin: 0; }
+
+/* CP95: Maintenance / Maintenance History search matches the search inputs used on other CLMS pages
+   (green #064b36 field, 1px rgba(255,255,255,.18) border, 9px radius, 46px high, white text). CSS only.
+   The label is the single visible field; the inner input is made flat so there is no box inside a box. */
+.clms-app-shell .maintenance-heading .maintenance-search {
+  box-sizing: border-box; min-height: 46px; padding: 0 12px; gap: 8px;
+  border: var(--clms-input-border); border-radius: 9px; background: var(--clms-input-bg); color: #fff;
+}
+.clms-app-shell .maintenance-heading .maintenance-search input {
+  min-height: 0; height: 100%; padding: 10px 0; border: 0 !important; border-radius: 0; outline: 0;
+  background-color: transparent !important; color: #fff !important;
+}
+.clms-app-shell .maintenance-heading .maintenance-search:focus-within { outline: 2px solid rgba(120, 255, 210, .55); outline-offset: 2px; }
+
+/* CP113: one toolbar row = Search + summary (context) box + Select All / Delete All. CSS only; wraps on tablet, stacks on mobile. */
+.maintenance-toolbar { display: flex; flex-wrap: nowrap; align-items: stretch; gap: 12px; margin: 0 0 16px; }
+.clms-app-shell .maintenance-toolbar .maintenance-search { flex: 1 1 220px; min-width: 160px; width: auto; box-sizing: border-box; min-height: 46px; margin: 0; padding: 0 12px; gap: 8px; border: var(--clms-input-border); border-radius: 9px; background: var(--clms-input-bg); color: #fff; align-self: stretch; }
+.clms-app-shell .maintenance-toolbar .maintenance-search input { min-height: 0; height: 100%; padding: 10px 0; border: 0 !important; border-radius: 0; outline: 0; background-color: transparent !important; color: #fff !important; }
+.clms-app-shell .maintenance-toolbar .maintenance-search:focus-within { outline: 2px solid rgba(120, 255, 210, .55); outline-offset: 2px; }
+.maintenance-context { display: flex; flex: 0 0 auto; align-items: stretch; gap: 8px; }
+.maintenance-context > div { box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; min-height: 46px; padding: 4px 14px; border: 1px solid var(--dashboard-line); border-radius: 10px; background: rgba(255, 255, 255, .12); white-space: nowrap; }
+.maintenance-context span { display: block; color: var(--dashboard-ink-muted); font-size: 11px; line-height: 1.1; }
+.maintenance-context strong { display: block; margin: 2px 0 0; font-size: 18px; line-height: 1; }
+.maintenance-toolbar .maintenance-bulk-bar { flex: 0 0 auto; flex-wrap: nowrap; align-items: stretch; justify-content: flex-end; gap: 8px; padding: 0; margin: 0; }
+.clms-app-shell .maintenance-toolbar .maintenance-bulk-bar .maintenance-update-button,
+.clms-app-shell .maintenance-toolbar .maintenance-bulk-bar .clms-delete-all { min-height: 46px; white-space: nowrap; }
+.maintenance-panel-heading.maintenance-panel-heading-actions { justify-content: flex-end; }
+/* CP133: desktop toolbar alignment - search capped at about half the toolbar (like Laboratories); summary + actions share the same row, vertically centred. */
+@media (min-width: 1101px) {
+  .maintenance-toolbar { align-items: center; }
+  .clms-app-shell .maintenance-toolbar .maintenance-search { flex: 1 1 220px; max-width: 50%; }
+  .maintenance-toolbar .maintenance-bulk-bar { margin-left: auto; }
+}
+@media (max-width: 1100px) {
+  .maintenance-toolbar { flex-wrap: wrap; }
+  .clms-app-shell .maintenance-toolbar .maintenance-search { flex: 1 1 100%; max-width: 100%; }
+  .maintenance-context { flex: 1 1 auto; }
+  .maintenance-context > div { flex: 1 1 0; }
+  .maintenance-toolbar .maintenance-bulk-bar { flex: 0 0 auto; margin-left: auto; }
+}
+@media (max-width: 640px) {
+  .maintenance-context { flex: 1 1 100%; }
+  .maintenance-context > div { min-width: 0; padding: 4px 8px; white-space: normal; }
+  .maintenance-context span { overflow-wrap: anywhere; }
+  .maintenance-toolbar .maintenance-bulk-bar { flex: 1 1 100%; flex-wrap: wrap; margin-left: 0; }
+  .clms-app-shell .maintenance-toolbar .maintenance-bulk-bar .maintenance-update-button,
+  .clms-app-shell .maintenance-toolbar .maintenance-bulk-bar .clms-delete-all { flex: 1 1 calc(50% - 4px); }
+}
+
+/* CP164: shorter Maintenance search bar (the Laboratories search is likewise a compact field, not a full-row bar). */
+.clms-app-shell .maintenance-toolbar .maintenance-search { flex: 1 1 180px; max-width: 320px; }
+@media (max-width: 760px) { .clms-app-shell .maintenance-toolbar .maintenance-search { max-width: none; } }
+
+/* CP168: Reservations-style table, search about half the toolbar (Laboratories reference), selection + typeable page box. */
+@media screen {
+  .clms-app-shell .maintenance-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .clms-app-shell .maintenance-toolbar .maintenance-search { flex: 0 1 50%; max-width: 50%; min-width: 220px; width: auto; box-sizing: border-box; min-height: 42px; }
+  .clms-app-shell .maintenance-toolbar .maintenance-bulk-bar { margin-left: 0; flex: 0 1 auto; align-items: center; }
+  .clms-app-shell .maintenance-toolbar .maintenance-bulk-bar .maintenance-update-button,
+  .clms-app-shell .maintenance-toolbar .maintenance-bulk-bar .clms-delete-all { min-height: 42px; height: 42px; }
+  .clms-app-shell .maintenance-table { width: 100%; border-collapse: collapse; min-width: 920px; }
+  /* th/td padding and font sizes come from the shared ClmsTheme.css table rule (same one the Reservations table gets), so only borders/hover/checkbox are set here. */
+  .clms-app-shell .maintenance-table th, .clms-app-shell .maintenance-table td { border-top: 0; border-bottom: 1px solid rgba(255,255,255,.11); text-align: left; }
+  .clms-app-shell .maintenance-table tbody tr:hover { background: rgba(255,255,255,.035); }
+  .clms-app-shell .maintenance-table .maintenance-select-cell input { width: 16px; height: 16px; accent-color: #079d6d; }
+  .clms-app-shell .maintenance-table-wrap { width: 100%; overflow-x: auto; }
+  .clms-app-shell .maintenance-page-jump { display: inline-flex; align-items: center; gap: 6px; }
+  .clms-app-shell .maintenance-page-jump input { width: 56px; height: 34px; box-sizing: border-box; text-align: center; }
+}
+@media screen and (max-width: 760px) {
+  .clms-app-shell .maintenance-toolbar .maintenance-search { flex: 1 1 100%; max-width: 100%; }
+  .clms-app-shell .maintenance-toolbar .maintenance-bulk-bar { flex: 1 1 100%; }
+}
+
+/* CP169: History toolbar - Save as PDF sits directly left of Delete All. On phones Select All takes its own row so the
+   Save as PDF + Delete All pair always stays side by side (50/50) on the same row. */
+.maintenance-bulk-bar .maintenance-save-pdf { white-space: nowrap; }
+@media (max-width: 640px) {
+  .clms-app-shell .maintenance-toolbar .maintenance-bulk-bar.has-pdf > :first-child { flex: 1 1 100%; }
+  .clms-app-shell .maintenance-toolbar .maintenance-bulk-bar.has-pdf .maintenance-save-pdf { order: 8; }
+  .clms-app-shell .maintenance-toolbar .maintenance-bulk-bar.has-pdf .maintenance-save-pdf ~ .clms-delete-all { order: 9; }
+}
+/* CP169: with the extra Save as PDF button the selected-state toolbar (5 buttons) no longer fits beside a fixed-50% search, so on desktop
+   the toolbar stays on one row and the search (still up to 50%) gives up width instead of wrapping the buttons under it. */
+@media screen and (min-width: 1101px) {
+  .clms-app-shell .maintenance-toolbar { flex-wrap: nowrap; }
+  .clms-app-shell .maintenance-toolbar .maintenance-search { flex: 0 1 50%; min-width: 200px; }
+  .clms-app-shell .maintenance-toolbar .maintenance-bulk-bar { flex: 0 0 auto; flex-wrap: nowrap; margin-left: auto; }
+}

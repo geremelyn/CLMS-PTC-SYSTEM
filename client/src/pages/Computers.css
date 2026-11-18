@@ -1,0 +1,922 @@
+/* =========================================
+   COMPUTERS PAGE
+   Same vibes as MISDashboard / Labs / Users
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --dashboard-ink: oklch(98% 0.01 160);
+    --dashboard-ink-soft: oklch(91% 0.02 160);
+    --dashboard-ink-muted: oklch(82% 0.03 160);
+    --dashboard-panel: rgba(255, 255, 255, 0.14);
+    --dashboard-panel-deep: rgba(5, 42, 30, 0.7);
+    --dashboard-line: rgba(255, 255, 255, 0.28);
+    --dashboard-line-soft: rgba(255, 255, 255, 0.16);
+    --dashboard-green: oklch(58% 0.13 163);
+    --dashboard-green-bright: oklch(72% 0.13 163);
+    --dashboard-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: var(--dashboard-ink);
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================
+   ROOT CONTAINER
+========================================= */
+
+.computers-page {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    padding: 22px 28px 55px;
+    color: var(--dashboard-ink);
+    background: url('/schoolbg.jpg') center / cover no-repeat;
+    animation: dashboardFadeIn 0.8s ease-out both;
+}
+
+.dashboard-overlay {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(120deg, rgba(5, 39, 25, 0.9), rgba(7, 48, 34, 0.78), rgba(8, 22, 17, 0.68));
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.dashboard-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 78px;
+    padding: 12px 22px;
+    border: 1px solid var(--dashboard-line);
+    border-radius: 19px;
+    background: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 15px 40px rgba(6, 24, 16, 0.3);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    animation: dashboardHeaderIn 0.7s var(--dashboard-ease) both;
+}
+
+.brand-section,
+.user-section {
+    display: flex;
+    align-items: center;
+}
+
+.brand-section {
+    gap: 13px;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 53px;
+    height: 53px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: oklch(98% 0.01 160);
+    box-shadow: 0 5px 15px rgba(6, 24, 16, 0.25);
+}
+
+.brand-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-text h1 {
+    margin: 0;
+    color: var(--dashboard-ink);
+    font-size: 24px;
+    line-height: 1.15;
+    font-weight: 750;
+    letter-spacing: 0.02em;
+}
+
+.brand-text span {
+    display: block;
+    margin-top: 4px;
+    color: var(--dashboard-ink-soft);
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.user-section {
+    gap: 10px;
+    padding: 6px 8px 6px 6px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: oklch(97% 0.01 160);
+    color: oklch(35% 0.12 305);
+    font-size: 20px;
+}
+
+.user-info-header {
+    display: flex;
+    flex-direction: column;
+    padding-right: 5px;
+}
+
+.user-info-header strong {
+    color: var(--dashboard-ink);
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.user-info-header span {
+    display: block;
+    margin-top: 4px;
+    color: var(--dashboard-ink-soft);
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+/* =========================================
+   CONTENT LAYOUT
+========================================= */
+
+.dashboard-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 22px;
+    min-height: calc(100vh - 100px);
+    margin-top: 20px;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.dashboard-sidebar {
+    width: 245px;
+    min-height: 625px;
+    flex-shrink: 0;
+    padding: 24px 15px;
+    border: 1px solid var(--dashboard-line);
+    border-radius: 19px;
+    background: var(--dashboard-panel-deep);
+    box-shadow: 0 15px 40px rgba(6, 24, 16, 0.25);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    animation: dashboardSidebarIn 0.8s var(--dashboard-ease) 0.15s both;
+}
+
+.sidebar-title {
+    padding: 0 13px 14px;
+    color: var(--dashboard-ink-muted);
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    text-align: center;
+}
+
+.dashboard-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 50px;
+    margin-bottom: 7px;
+    padding: 0 14px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--dashboard-ink-soft);
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 550;
+    line-height: 1.5;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.25s var(--dashboard-ease), background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.dashboard-button:hover,
+.dashboard-button:focus-visible {
+    transform: translateY(2px);
+    border-color: var(--dashboard-line-soft);
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--dashboard-ink);
+}
+
+.dashboard-button.active {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--dashboard-green);
+    box-shadow: 0 8px 20px rgba(6, 24, 16, 0.2);
+    color: var(--dashboard-ink);
+}
+
+.button-icon {
+    display: none;
+}
+
+.sidebar-divider {
+    width: 90%;
+    height: 1px;
+    margin: 24px auto;
+    background: var(--dashboard-line-soft);
+}
+
+.logout-button {
+    color: var(--dashboard-ink-soft);
+}
+
+.logout-button:hover,
+.logout-button:focus-visible {
+    border-color: rgba(255, 160, 160, 0.28);
+    background: rgba(180, 50, 50, 0.3);
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.computers-main {
+    flex: 1;
+    min-width: 0;
+    padding: 17px 20px 25px;
+    animation: dashboardMainIn 0.8s var(--dashboard-ease) 0.2s both;
+}
+
+/* =========================================
+   PAGE TITLE BAR
+========================================= */
+
+.page-title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.page-title-bar h2 {
+    margin: 0;
+    color: var(--dashboard-ink);
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 750;
+    text-shadow: 0 4px 18px rgba(6, 24, 16, 0.35);
+}
+
+.title-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 22px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    background: var(--dashboard-green);
+    box-shadow: 0 8px 20px rgba(6, 24, 16, 0.2);
+    color: var(--dashboard-ink);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.25s var(--dashboard-ease), background 0.25s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    background: var(--dashboard-green-bright);
+}
+
+.btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 22px;
+    border: 1px solid var(--dashboard-line);
+    border-radius: 12px;
+    background: var(--dashboard-panel);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--dashboard-ink-soft);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.25s var(--dashboard-ease), background 0.25s ease, color 0.25s ease;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--dashboard-ink);
+}
+
+/* =========================================
+   ALERT MESSAGE
+========================================= */
+
+.alert-message {
+    margin-bottom: 18px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-size: 14px;
+    text-align: center;
+}
+
+.alert-message.success {
+    border: 1px solid rgba(72, 187, 120, 0.3);
+    background: rgba(72, 187, 120, 0.12);
+    color: oklch(82% 0.12 155);
+}
+
+.alert-message.error {
+    border: 1px solid rgba(220, 80, 80, 0.3);
+    background: rgba(220, 80, 80, 0.12);
+    color: oklch(82% 0.08 20);
+}
+
+/* =========================================
+   STATUS / CONDITION BADGES
+========================================= */
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.status-badge.active {
+    background: rgba(72, 187, 120, 0.2);
+    color: oklch(78% 0.14 155);
+    border: 1px solid rgba(72, 187, 120, 0.3);
+}
+
+.status-badge.inactive {
+    background: rgba(160, 160, 160, 0.2);
+    color: oklch(78% 0.02 160);
+    border: 1px solid rgba(160, 160, 160, 0.3);
+}
+
+.condition-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.condition-badge.working {
+    background: rgba(72, 187, 120, 0.2);
+    color: oklch(78% 0.14 155);
+    border: 1px solid rgba(72, 187, 120, 0.3);
+}
+
+.condition-badge.under-repair {
+    background: rgba(237, 187, 51, 0.2);
+    color: oklch(82% 0.12 85);
+    border: 1px solid rgba(237, 187, 51, 0.3);
+}
+
+.condition-badge.damaged,
+.condition-badge.missing,
+.condition-badge.custom {
+    background: rgba(220, 80, 80, 0.2);
+    color: oklch(78% 0.1 20);
+    border: 1px solid rgba(220, 80, 80, 0.3);
+}
+
+.condition-badge.retired {
+    background: rgba(160, 160, 160, 0.2);
+    color: oklch(78% 0.02 160);
+    border: 1px solid rgba(160, 160, 160, 0.3);
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
+.computers-table-wrapper {
+    border: 1px solid var(--dashboard-line);
+    border-radius: 18px;
+    background: var(--dashboard-panel);
+    box-shadow: 0 20px 50px rgba(6, 24, 16, 0.18);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
+    overflow-x: auto;
+}
+
+.computers-table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+}
+
+.computers-table thead {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.computers-table th {
+    padding: 14px 16px;
+    color: var(--dashboard-ink-muted);
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--dashboard-line-soft);
+    white-space: nowrap;
+}
+
+.computers-table td {
+    padding: 14px 16px;
+    color: var(--dashboard-ink-soft);
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    white-space: nowrap;
+}
+
+.computers-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.computers-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.computers-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 0 14px;
+    border: 1px solid var(--dashboard-line-soft);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--dashboard-ink-soft);
+    font-size: 13px;
+    font-weight: 550;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-edit:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--dashboard-ink);
+}
+
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 0 14px;
+    border: 1px solid rgba(255, 160, 160, 0.2);
+    border-radius: 8px;
+    background: rgba(180, 50, 50, 0.2);
+    color: oklch(85% 0.08 20);
+    font-size: 13px;
+    font-weight: 550;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-delete:hover {
+    background: rgba(180, 50, 50, 0.4);
+}
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal-backdrop {
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(3, 18, 12, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: modalFadeIn 0.25s ease-out both;
+    overflow-y: auto;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 560px;
+    padding: 30px 28px;
+    border: 1px solid var(--dashboard-line);
+    border-radius: 20px;
+    background: var(--dashboard-panel-deep);
+    box-shadow: 0 30px 80px rgba(3, 18, 12, 0.5);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    animation: modalSlideIn 0.35s var(--dashboard-ease) both;
+}
+
+.modal-card h2 {
+    margin: 0 0 22px;
+    color: var(--dashboard-ink);
+    font-size: 22px;
+    font-weight: 750;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--dashboard-ink-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--dashboard-line-soft);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--dashboard-ink);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.form-group textarea {
+    height: 80px;
+    padding: 10px 14px;
+    resize: vertical;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--dashboard-ink-muted);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--dashboard-green);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.form-group select option {
+    background: #0a2e1e;
+    color: var(--dashboard-ink);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.form-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.modal-actions .btn-primary,
+.modal-actions .btn-secondary {
+    flex: 1;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.dashboard-footer {
+    position: relative;
+    z-index: 2;
+    margin-top: 17px;
+    color: var(--dashboard-ink-muted);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes dashboardFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes dashboardHeaderIn {
+    from { opacity: 0; transform: translateY(-25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dashboardSidebarIn {
+    from { opacity: 0; transform: translateX(-35px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes dashboardMainIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+    .computers-page {
+        padding: 18px 20px 50px;
+    }
+
+    .dashboard-content {
+        gap: 15px;
+    }
+
+    .dashboard-sidebar {
+        width: 205px;
+    }
+
+    .computers-main {
+        padding: 15px 10px;
+    }
+}
+
+@media (max-width: 760px) {
+    .dashboard-content {
+        flex-direction: column;
+    }
+
+    .dashboard-sidebar {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        min-height: auto;
+        gap: 7px;
+        padding: 14px;
+    }
+
+    .sidebar-title,
+    .sidebar-divider {
+        display: none;
+    }
+
+    .dashboard-button {
+        flex: 1 1 150px;
+        min-height: 48px;
+        margin: 0;
+    }
+
+    .computers-main {
+        padding: 10px 0;
+    }
+
+    .page-title-bar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .title-actions {
+        justify-content: center;
+    }
+
+    .form-row,
+    .form-row-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .computers-page {
+        padding: 12px 12px 45px;
+    }
+
+    .dashboard-header {
+        padding: 10px 13px;
+    }
+
+    .brand-logo {
+        width: 43px;
+        height: 43px;
+    }
+
+    .brand-text h1 {
+        font-size: 21px;
+    }
+
+    .brand-text span,
+    .user-info-header {
+        display: none;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .dashboard-sidebar {
+        padding: 9px;
+    }
+
+    .dashboard-button {
+        min-height: 46px;
+        padding: 0 8px;
+        font-size: 13px;
+    }
+
+    .computers-main {
+        padding: 8px 0;
+    }
+
+    .page-title-bar h2 {
+        font-size: 24px;
+    }
+
+    .modal-card {
+        margin: 0 12px;
+        padding: 22px 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .computers-page,
+    .dashboard-header,
+    .dashboard-sidebar,
+    .computers-main,
+    .modal-backdrop,
+    .modal-card {
+        animation: none;
+    }
+
+    .dashboard-button,
+    .btn-primary,
+    .btn-secondary,
+    .btn-edit,
+    .btn-delete,
+    .computers-table tbody tr {
+        transition: none;
+    }
+}
+.computers-filter-bar{display:flex;gap:10px;align-items:center;margin:0 0 14px}.computers-filter-bar input,.computers-filter-bar select{padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:9px;background:rgba(0,0,0,.12);color:inherit}.computers-filter-bar input{flex:1;min-width:220px}.computers-filter-bar select{min-width:210px}
+.list-filter{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:rgba(255,255,255,.78)}.list-filter select{padding:9px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.16);background:rgba(0,45,32,.65);color:#fff}
+
+.computer-condition-note{display:block;margin-top:4px;max-width:220px;color:#ffdca5;font-size:11px;line-height:1.35;white-space:normal}
+
+.computers-search-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0;padding:12px 14px;border:1px solid rgba(255,255,255,.18);border-radius:12px;background:rgba(0,42,31,.28)}.computers-search-row label{font-size:12px;font-weight:800}.computers-search-row input{flex:1;min-width:240px;padding:10px 12px;border-radius:9px}.computers-search-row button,.computers-pagination button,.computers-pagination select{padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#064b36;color:#fff}.computers-pagination{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:12px;padding:10px;font-size:12px}.computers-pagination button{cursor:pointer}.computers-pagination button:disabled{opacity:.45;cursor:not-allowed}
+
+.option-add-button, .computer-configurable-input button { margin-top: 6px; font-size: 0.78rem; padding: 5px 8px; cursor: pointer; }
+.computer-configurable-input { display: flex; gap: 6px; align-items: center; }
+.computer-configurable-input input { min-width: 0; flex: 1; }
+.title-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.computers-table th input[type="checkbox"],.computers-table td input[type="checkbox"]{width:16px;height:16px;accent-color:#07865d;cursor:pointer}.btn-delete{border:1px solid rgba(255,110,110,.35);border-radius:8px;background:#9f3030;color:#fff;padding:9px 12px;font-weight:700;cursor:pointer}.btn-edit{cursor:pointer}@media print{.bulk-select-column,.computers-table th input[type="checkbox"],.computers-table td input[type="checkbox"]{display:none!important}}
+
+/* CP114: Computers summary box (same glass look as the other CLMS summary boxes, e.g. the Maintenance summary). */
+.computers-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 12px 0; }
+.computers-stats > div { box-sizing: border-box; min-width: 0; padding: 14px 18px; border: 1px solid var(--dashboard-line, rgba(255, 255, 255, .18)); border-radius: 14px; background: rgba(255, 255, 255, .12); box-shadow: 0 12px 30px rgba(6, 24, 16, .14); backdrop-filter: blur(10px); }
+.computers-stats span { display: block; color: var(--dashboard-ink-muted, rgba(255, 255, 255, .75)); font-size: 13px; overflow-wrap: anywhere; }
+.computers-stats strong { display: block; margin-top: 4px; font-size: 28px; line-height: 1; }
+@media (max-width: 640px) { .computers-stats { gap: 8px; } .computers-stats > div { padding: 10px 10px; border-radius: 12px; } .computers-stats span { font-size: 11px; } .computers-stats strong { font-size: 22px; } }
+
+/* CP131: Computers summary statistics in a green translucent context box (matches MIS dashboards / Laboratories) */
+.computers-stats { width: min(100%, 1000px); margin: 0 auto 18px; padding: 22px 24px; box-sizing: border-box; gap: 16px; border: 1px solid rgba(255, 255, 255, .2); border-radius: 22px; background: rgba(0, 56, 41, .34); backdrop-filter: blur(10px); box-shadow: 0 24px 60px rgba(0, 0, 0, .16); }
+.computers-stats > div { padding: 16px 18px; text-align: center; border: 1px solid rgba(255, 255, 255, .18); border-radius: 16px; background: rgba(0, 36, 27, .44); box-shadow: none; backdrop-filter: none; }
+.computers-stats span { color: rgba(244, 255, 249, .86); font-weight: 700; }
+.computers-stats strong { margin-top: 8px; color: #fff; }
+@media (max-width: 640px) { .computers-stats { padding: 14px 10px; gap: 8px; border-radius: 18px; }
+ .computers-stats > div { padding: 10px 6px; border-radius: 12px; } }
+
+/* CP149: Computers - search + action buttons share ONE toolbar row on wide desktop (>=1500px viewport; the 245px sidebar leaves ~1170px+); below that the actions wrap as a whole group onto their own row, and on phones the buttons go two per row. Markup moved only; handlers unchanged. */
+.clms-app-shell .computers-search-row .toolbar-inline-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:10px;margin:0 0 0 auto;padding:0;flex:1 1 100%}
+.clms-app-shell .computers-search-row .toolbar-inline-actions>button,.clms-app-shell .computers-search-row .toolbar-inline-actions>.file-actions>button{min-height:44px;box-sizing:border-box;white-space:nowrap}
+@media screen and (min-width:1500px){
+  .clms-app-shell .computers-search-row{flex-wrap:nowrap}
+  .clms-app-shell .computers-search-row input[type=search]{flex:1 1 200px;min-width:0}
+  .clms-app-shell .computers-search-row .toolbar-inline-actions{flex:0 0 auto;flex-wrap:nowrap}
+}
+@media screen and (max-width:560px){
+  .clms-app-shell .computers-search-row .toolbar-inline-actions{justify-content:flex-start}
+  .clms-app-shell .computers-search-row .toolbar-inline-actions>button{flex:1 1 calc(50% - 10px)}
+}
+/* CP149: keep the action buttons in the solid CLMS green they had in the title bar (the search-row button rule would otherwise dim them). */
+.clms-app-shell .computers-search-row .toolbar-inline-actions>button:not(.clms-delete-all):not(.btn-delete):not(.equipment-danger-button),.clms-app-shell .computers-search-row .toolbar-inline-actions .file-actions>button{background:#079d6d;border:1px solid rgba(120,255,210,.3);border-radius:10px;color:#fff;font-weight:700;padding:0 16px;cursor:pointer}
+.clms-app-shell .computers-search-row .toolbar-inline-actions>button:not(.clms-delete-all):not(.btn-delete):not(.equipment-danger-button):hover:not(:disabled),.clms-app-shell .computers-search-row .toolbar-inline-actions .file-actions>button:hover{background:#0bb37f}
+.clms-app-shell .computers-search-row .toolbar-inline-actions button:disabled{opacity:.45;cursor:not-allowed}
+
+/* CP150: the toolbar's backdrop-filter makes its own stacking context; lift it above the later table so the File Actions dropdown stays clickable. */
+.computers-search-row{position:relative;z-index:5}
+
+/* CP189: Computers - search, context boxes (Total Computers / Working / Need Attention) and actions share one toolbar row (wraps only when the width runs out). */
+.clms-app-shell .computers-search-row{align-items:center;gap:10px}
+.computers-context-boxes{display:flex;align-items:stretch;gap:8px;flex:0 0 auto}
+.computers-context-boxes>div{display:flex;flex-direction:column;justify-content:center;align-items:center;height:44px;box-sizing:border-box;min-width:84px;padding:0 10px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:rgba(0,36,27,.44);white-space:nowrap}
+.computers-context-boxes span{font-size:9px;line-height:1.1;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(244,255,249,.8)}
+.computers-context-boxes strong{margin:0;font-size:15px;line-height:1.1;color:#fff}
+@media screen and (min-width:1100px){
+  .clms-app-shell .computers-search-row input[type=search]{flex:1 1 180px;min-width:140px}
+  .clms-app-shell .computers-search-row .toolbar-inline-actions{flex:0 0 auto;margin:0}
+}
+@media screen and (max-width:640px){
+  .computers-context-boxes{flex:1 1 100%;width:100%}
+  .computers-context-boxes>div{flex:1 1 0;min-width:0;height:auto;min-height:44px;padding:4px 6px;text-align:center}
+  .computers-context-boxes span{overflow-wrap:anywhere;font-size:8.5px}
+}

@@ -1,0 +1,31 @@
+/* CP28: Recycle Bin heading with the page actions in the upper-right (same idea as the other revised modules). Additive only. */
+.recycle-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.recycle-heading h1{margin:6px 0;flex:0 1 auto}
+.recycle-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;align-items:center;margin-left:auto}
+.recycle-actions button:disabled{opacity:.45;cursor:not-allowed}
+.recycle-row-actions{display:flex;gap:8px;flex-wrap:wrap}
+/* CP90: Permanent Delete keeps the exact size/padding/radius/font of its neighbouring buttons (shared .report-action-button) and uses the
+   same delete colors as the shared CLMS delete button (.clms-delete-all in ClmsTheme.css) instead of a separate solid red. */
+.report-action-button.recycle-danger{background:rgba(180,50,50,.2);border:1px solid rgba(255,160,160,.2);color:#f5b9b9;box-shadow:none;transition:background .2s ease}
+.report-action-button.recycle-danger:hover:not(:disabled){background:rgba(180,50,50,.4)}
+@media(max-width:760px){.recycle-actions{margin-left:0;justify-content:flex-start;width:100%}}
+
+/* CP146: search + actions share ONE toolbar row on desktop (Type, search, count, action buttons); wraps as whole blocks below 1500px viewport (the 245px sidebar leaves ~1170px of content) so nothing overlaps or clips. */
+.report-results-toolbar.recycle-toolbar{display:flex;align-items:center;gap:10px 12px;flex-wrap:wrap}
+.report-results-toolbar.recycle-toolbar .recycle-actions{margin-left:auto;flex:0 1 auto}
+.report-results-toolbar.recycle-toolbar .recycle-actions .report-action-button{min-height:44px;box-sizing:border-box;white-space:nowrap;padding:9px 16px}
+.report-results-toolbar.recycle-toolbar input[type=search]{flex:1 1 220px;min-width:0;min-height:44px;box-sizing:border-box}
+.report-results-toolbar.recycle-toolbar select{min-height:44px;box-sizing:border-box}
+@media screen and (min-width:1500px){
+  .report-results-toolbar.recycle-toolbar{flex-wrap:nowrap}
+  .report-results-toolbar.recycle-toolbar .recycle-actions{flex-wrap:nowrap;flex:0 0 auto}
+  .report-results-toolbar.recycle-toolbar strong{white-space:nowrap}
+}
+@media screen and (max-width:1499px){
+  .report-results-toolbar.recycle-toolbar{flex-wrap:wrap}
+  .report-results-toolbar.recycle-toolbar input[type=search]{flex:1 1 100%}
+  .report-results-toolbar.recycle-toolbar .recycle-actions{flex:1 1 100%;margin-left:0;justify-content:flex-start}
+}
+@media screen and (max-width:560px){
+  .report-results-toolbar.recycle-toolbar .recycle-actions .report-action-button{flex:1 1 calc(50% - 10px)}
+}

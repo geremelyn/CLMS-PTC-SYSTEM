@@ -1,0 +1,46 @@
+/* CP33 - Reusable PDF header (PTC / IICT). US Letter, printable without cropping. */
+.clms-pdf-header {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.12in;
+  padding: 0 0 0.08in;
+  margin: 0 0 0.12in;
+  color: #000;
+  background: #fff;
+  border-bottom: 1.5px solid #000;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.clms-pdf-header__logo {
+  flex: 0 0 auto;
+  width: 0.95in;
+  height: 0.95in;
+  object-fit: contain; /* never stretch */
+  display: block;
+}
+.clms-pdf-header__text {
+  flex: 0 1 auto;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  line-height: 1.25;
+}
+.clms-pdf-header__college {
+  margin: 0;
+  font-size: 15pt;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.clms-pdf-header__address {
+  margin: 1px 0 0;
+  font-size: 10pt;
+}
+.clms-pdf-header__institute {
+  margin: 4px 0 0;
+  font-size: 11pt;
+  font-weight: 700;
+}

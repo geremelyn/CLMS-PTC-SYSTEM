@@ -1,0 +1,60 @@
+.clms-date-picker{position:relative;width:100%;min-width:0}
+.clms-date-trigger{width:100%;min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid rgba(255,255,255,.24);border-radius:10px;background:#f7fbf8;color:#173b2d;font:inherit;font-size:14px;text-align:left;cursor:pointer}
+.clms-date-trigger:disabled{opacity:.6;cursor:not-allowed}
+.clms-date-backdrop{position:fixed;inset:0;z-index:4500;display:grid;place-items:center;padding:16px;background:rgba(10,20,15,.55);backdrop-filter:blur(3px)}
+.clms-date-popover{position:relative;box-sizing:border-box;width:min(94vw,360px);max-height:92vh;overflow-y:auto;padding:16px;border:1px solid rgba(255,255,255,.2);border-radius:16px;background:#f8fcf9;color:#173b2d;box-shadow:0 24px 70px rgba(0,0,0,.45);outline:none}
+.clms-date-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.clms-date-head h2{margin:0;font-size:16px}
+.clms-date-x{width:30px;height:30px;border:0;border-radius:50%;background:transparent;color:#4a5a52;font-size:22px;line-height:1;cursor:pointer}.clms-date-x:hover{background:#e4f0e8}
+.clms-date-chosen{margin:10px 0 0;font-size:12px;text-align:center;color:#173b2d}
+.clms-date-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+.clms-date-actions button{border:0;border-radius:10px;padding:9px 18px;font-weight:700;font-size:13px;cursor:pointer}
+.clms-date-save{background:#0a6b4a;color:#fff}.clms-date-save:disabled{opacity:.45;cursor:not-allowed}
+.clms-date-cancel{background:#e4ebe6;color:#173b2d}.clms-date-clear{margin-right:auto;background:transparent;color:#8a2a30;text-decoration:underline}.clms-date-clear:disabled{opacity:.4;cursor:not-allowed}
+.clms-date-required{position:absolute;left:0;bottom:0;width:100%;height:1px;opacity:0;pointer-events:none;border:0;padding:0}
+.clms-date-month-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.clms-date-month-bar strong{font-size:13px}
+.clms-date-month-bar button{width:28px;height:30px;border:0;border-radius:8px;background:#e4f0e8;color:#173b2d;font-size:22px;line-height:1;cursor:pointer}
+.clms-date-month-bar button:disabled{opacity:.35;cursor:not-allowed}
+.clms-date-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center}
+.clms-date-weekdays{margin-bottom:4px}
+.clms-date-weekdays span{padding:5px 0;color:#567064;font-size:10px;font-weight:800}
+.clms-date-grid button,.clms-date-blank{display:grid;place-items:center;min-width:0;min-height:31px;border:0;border-radius:8px;background:transparent;color:#173b2d;font-size:12px}
+.clms-date-grid button{cursor:pointer}
+.clms-date-grid button:hover:not(:disabled){background:#d7eee0}
+.clms-date-grid button.selected{background:#07875f;color:#fff;font-weight:800}
+.clms-date-grid button:disabled{background:#edf0ed;color:#b6c0b9;text-decoration:line-through;cursor:not-allowed}
+.clms-date-note{margin:10px 0 0;color:#657a6d;font-size:10px;text-align:center}
+
+.clms-date-grid button{position:relative}
+.clms-date-grid button.holiday:disabled{background:#fde8e6;color:#a1352b;text-decoration:none;font-weight:700}
+.clms-date-grid button.workday{box-shadow:inset 0 0 0 2px #2d9d6a}
+.clms-date-grid button i{position:absolute;right:4px;top:4px;width:5px;height:5px;border-radius:50%;background:#d6453a}
+.clms-date-grid button.workday i{background:#2d9d6a}
+.clms-date-holidays{list-style:none;margin:10px 0 0;padding:8px 0 0;border-top:1px solid #dbe7df;display:grid;gap:4px;font-size:11px;color:#173b2d;text-align:left}
+.clms-date-holidays li{display:grid;grid-template-columns:22px 1fr;column-gap:6px;align-items:baseline}
+.clms-date-holidays li b{text-align:right}
+.clms-date-holidays li small{grid-column:2;color:#657a6d;font-size:10px}
+.clms-date-holidays li.closed b{color:#c0392b}
+.clms-date-holidays li.working b{color:#1f8a5b}
+
+/* CP52: calendar popup = the shared dark green glass popup (same tokens as the Add Computer modal / CLMS dialogs; fallbacks keep it working without ClmsTheme). */
+.clms-date-backdrop{background:var(--clms-popup-backdrop,rgba(3,18,12,.7));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.clms-date-popover{background:var(--clms-popup-bg,rgba(5,42,30,.72));color:#fff;border:var(--clms-popup-border,1px solid rgba(255,255,255,.28));box-shadow:var(--clms-popup-shadow,0 30px 80px rgba(3,18,12,.5));-webkit-backdrop-filter:var(--clms-popup-blur,blur(22px));backdrop-filter:var(--clms-popup-blur,blur(22px))}
+.clms-date-x{color:#fff}.clms-date-x:hover{background:rgba(255,255,255,.18)}
+.clms-date-chosen{color:#fff}
+.clms-date-note{color:rgba(255,255,255,.78)}
+.clms-date-month-bar button{background:rgba(255,255,255,.16);color:#fff}.clms-date-month-bar button:hover:not(:disabled){background:rgba(255,255,255,.28)}
+.clms-date-weekdays span{color:rgba(255,255,255,.72)}
+.clms-date-grid button,.clms-date-blank{color:#fff}
+.clms-date-grid button:hover:not(:disabled){background:rgba(255,255,255,.22)}
+.clms-date-grid button.selected,.clms-date-grid button.selected:hover:not(:disabled){background:#07a876;color:#fff;font-weight:800;box-shadow:0 0 0 2px #fff}
+.clms-date-grid button:disabled{background:rgba(0,0,0,.18);color:rgba(255,255,255,.38);text-decoration:line-through}
+.clms-date-grid button.holiday:disabled{background:rgba(255,120,120,.2);color:#ffc4c4;text-decoration:none;font-weight:700}
+.clms-date-grid button.workday{box-shadow:inset 0 0 0 2px #7de0b0}
+.clms-date-grid button i{background:#ff8a80}.clms-date-grid button.workday i{background:#7de0b0}
+.clms-date-holidays{border-top-color:rgba(255,255,255,.22);color:#fff}
+.clms-date-holidays li small{color:rgba(255,255,255,.72)}
+.clms-date-holidays li.closed b{color:#ff9b9b}.clms-date-holidays li.working b{color:#7de0b0}
+.clms-date-save{background:#fff;color:#0a6b4a}
+.clms-date-cancel{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)!important}
+.clms-date-clear{color:#ffb3b3}

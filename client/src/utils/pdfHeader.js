@@ -1,0 +1,100 @@
+// CP33 - Shared PDF header config + standalone HTML builder (for print windows / PDF export).
+export const PDF_HEADER = {
+  leftLogo: '/clms-logo.png',   // official PTC logo
+  rightLogo: '/icct-logo.png',  // existing ICCT logo (unchanged)
+  college: 'PATEROS TECHNOLOGICAL COLLEGE',
+  address: 'College St., Sto. Rosario Kanluran, Pateros, Metro Manila',
+  institute: 'Institute of Information and Computing Technology',
+};
+
+// US Letter, 8.5 x 11 in. 0.5in margins keep the header inside the printable area.
+export const PDF_PAGE = { size: 'letter', widthIn: 8.5, heightIn: 11, marginIn: 0.5 };
+
+export const PDF_PAGE_CSS = `@page { size: 8.5in 11in; margin: ${PDF_PAGE.marginIn}in; }`;
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+const HEADER_CSS = `
+.clms-pdf-header{box-sizing:border-box;width:100%;display:flex;align-items:center;justify-content:center;gap:.12in;padding:0 0 .08in;margin:0 0 .12in;color:#000;background:#fff;border-bottom:1.5px solid #000;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.clms-pdf-header__logo{flex:0 0 auto;width:.95in;height:.95in;object-fit:contain;display:block}
+.clms-pdf-header__text{flex:0 1 auto;text-align:center;font-family:"Times New Roman",Times,serif;line-height:1.25}
+.clms-pdf-header__college{margin:0;font-size:15pt;font-weight:700;letter-spacing:.01em}
+.clms-pdf-header__address{margin:1px 0 0;font-size:10pt}
+.clms-pdf-header__institute{margin:4px 0 0;font-size:11pt;font-weight:700}`;
+
+/** Header markup string; logoBase is the origin/path prefix used to resolve logo URLs (default: ''). */
+export function pdfHeaderHtml(logoBase = '') {
+  const h = PDF_HEADER;
+  return `<header class="clms-pdf-header">
+<img class="clms-pdf-header__logo" src="${esc(logoBase + h.leftLogo)}" alt="PTC logo">
+<div class="clms-pdf-header__text"><p class="clms-pdf-header__college">${esc(h.college)}</p><p class="clms-pdf-header__address">${esc(h.address)}</p><p class="clms-pdf-header__institute">${esc(h.institute)}</p></div>
+<img class="clms-pdf-header__logo" src="${esc(logoBase + h.rightLogo)}" alt="ICCT logo">
+</header>`;
+}
+
+// CP97 - "Printed by" name of the signed-in user, format: "Surname, First Name, Middle Initial".
+// Uses the account's saved surname / first_name / middle_initial. A missing middle initial is simply left out (nothing invented).
+// Legacy accounts that only have full_name fall back to that stored name unchanged.
+export function formatPrintedByName(user) {
+  const clean = (v) => String(v ?? '').trim().replace(/\s+/g, ' ');
+  const surname = clean(user?.surname), first = clean(user?.first_name);
+  const initial = clean(user?.middle_initial).replace(/\./g, '').toUpperCase();
+  if (surname && first) return [surname, first, initial ? `${initial}.` : ''].filter(Boolean).join(', ');
+  return clean(user?.full_name);
+}
+function storedUser() {
+  try { return typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem('user') || 'null') : null; } catch { return null; }
+}
+const PRINTED_BY_CSS = '.clms-pdf-printed-by{margin:0 0 .08in;font-size:9pt;text-align:right;color:#000}';
+
+// CP142 - Signature for the admin module PDFs (Laboratories, Computers, Equipment, User Accounts): a signature line with the full name
+// of the person who generated the PDF below it. It is the LAST row of the report table, so it can only print once, on the final page,
+// directly under the last data row (never over table content). The last two data rows are kept with it (break-after:avoid), so the
+// signature is never alone on an otherwise empty page. It is NOT pinned to the physical bottom edge: stretching the table to do so
+// spreads the data rows over the page, and a CSS-only "last page bottom" is not possible in browser print.
+export function formatSignatureName(user) {
+  const clean = (v) => String(v ?? '').trim().replace(/\s+/g, ' ');
+  return clean(user?.full_name) || formatPrintedByName(user);
+}
+const SIGNATURE_CSS = `.pdf-table tr.clms-pdf-signature-row td{border:0;padding:0;background:#fff}
+.pdf-table tbody tr:nth-last-child(-n+3){break-after:avoid;page-break-after:avoid}
+.clms-pdf-signature{margin:0 0 0 auto;padding-top:.45in;width:3in;break-inside:avoid;page-break-inside:avoid;color:#000}
+.clms-pdf-signature__line{border-top:1px solid #000;height:0}
+.clms-pdf-signature__name{margin:4px 0 0;font-size:10pt;text-align:center;font-weight:700;overflow-wrap:anywhere}`;
+function withSignatureRow(bodyHtml, block) {
+  const i = bodyHtml.lastIndexOf('</tbody></table>');
+  if (i < 0) return bodyHtml + block; // no report table (not used by the four module PDFs)
+  const cols = ((bodyHtml.match(/<thead>[\s\S]*?<\/thead>/) || [''])[0].match(/<th[\s>]/g) || []).length || 1;
+  return `${bodyHtml.slice(0, i)}<tr class="clms-pdf-signature-row"><td colspan="${cols}">${block}</td></tr>${bodyHtml.slice(i)}`;
+}
+const PRINTED_LABEL = { plain: 'Printed by', signed: 'Generated By' };
+
+/** Full standalone Letter-size HTML document: header + caller-provided body HTML. `printedBy` defaults to the signed-in user. */
+export function buildPdfDocumentHtml({ title = 'CLMS Document', bodyHtml = '', logoBase = '', printedBy, signature = false } = {}) {
+  const who = printedBy === undefined ? storedUser() : printedBy;
+  const name = formatPrintedByName(who);
+  // CP142: with `signature` the line reads "Generated By" and a signature line + full name closes the table on the last page.
+  const printedLine = name ? `<p class="clms-pdf-printed-by">${signature ? PRINTED_LABEL.signed : PRINTED_LABEL.plain}: ${esc(name)}</p>` : '';
+  const block = `<div class="clms-pdf-signature"><div class="clms-pdf-signature__line"></div><p class="clms-pdf-signature__name">${esc(formatSignatureName(who))}</p></div>`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(title)}</title>
+<style>${PDF_PAGE_CSS}html,body{margin:0;padding:0;background:#fff;color:#000;font-family:Arial,Helvetica,sans-serif}${HEADER_CSS}${PRINTED_BY_CSS}${signature ? SIGNATURE_CSS : ''}</style></head>
+<body>${pdfHeaderHtml(logoBase)}${printedLine}${signature ? withSignatureRow(bodyHtml, block) : bodyHtml}</body></html>`;
+}
+
+// CP39 - One shared stylesheet for every module PDF (title, meta line, table, headings, empty row, footer).
+// Modules add only their own column widths / small-text helpers on top of this.
+const PDF_COMMON_CSS = `
+.pdf-title{margin:.05in 0 .02in;font-size:14pt;text-align:center;font-weight:700}
+.pdf-meta{margin:0 0 .12in;font-size:9pt;text-align:center;color:#222}
+table.pdf-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8pt}
+.pdf-table th{background:#e9e9e9;border:1px solid #777;padding:3px 4px;text-align:left;font-size:8pt;font-weight:700}
+.pdf-table td{border:1px solid #999;padding:3px 4px;vertical-align:top;overflow-wrap:anywhere;word-break:break-word}
+.pdf-table thead{display:table-header-group}
+.pdf-table tr{break-inside:avoid;page-break-inside:avoid}
+.pdf-empty{text-align:center;padding:.3in;font-style:italic}`;
+
+/** Shared module CSS + footer ("Generated <Manila date>" left, "Page X of Y" right). */
+export function pdfCommonCss(stamp) {
+  const footer = `@page{@bottom-left{content:${JSON.stringify('Generated ' + stamp)};font-size:8pt;color:#333}@bottom-right{content:"Page " counter(page) " of " counter(pages);font-size:8pt;color:#333}}`;
+  return PDF_COMMON_CSS + footer;
+}

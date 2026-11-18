@@ -1,0 +1,33 @@
+:root {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #f3fff9;
+  background: #062b20;
+}
+
+html, body, #root {
+  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body { min-height: 100vh; }
+button, input, select, textarea { font: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+
+h1, h2, h3, h4, p { margin-top: 0; }
+
+/* Consistent CLMS form controls: dark-green typing fields with readable white text. */
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), textarea {
+  background-color: #064b36;
+  color: #ffffff;
+  caret-color: #ffffff;
+  border-color: rgba(255,255,255,.24);
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"])::placeholder, textarea::placeholder { color: rgba(255,255,255,.72); opacity: 1; }
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus, textarea:focus { outline-color: #a4d7b8; border-color: #a4d7b8; }

@@ -1,0 +1,117 @@
+.report-page-heading{padding:16px 8px 22px}.report-page-heading span,.report-card small{font-size:10px;letter-spacing:2px;font-weight:800;color:#9be5c7}.report-page-heading h1{margin:6px 0;font-size:clamp(34px,4vw,50px);color:#f5fff9}.report-page-heading p{margin:0;color:rgba(255,255,255,.68);font-size:13px}.report-card{border:1px solid rgba(255,255,255,.17);border-radius:20px;background:rgba(218,235,227,.14);backdrop-filter:blur(17px);box-shadow:0 18px 45px rgba(0,0,0,.10);margin-bottom:20px}.report-tabs{padding:20px}.report-tabs-head,.report-results-head{display:flex;justify-content:space-between;align-items:center;gap:20px}.report-tabs h2,.report-results h2{margin:5px 0 0;color:#f4fff9;font-size:22px}.report-tabs-head button{border:1px solid rgba(120,255,210,.3);border-radius:10px;background:#079d6d;color:white;padding:10px 14px;font-weight:800;cursor:pointer}.report-tab-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.report-tab-list button{border:1px solid rgba(255,255,255,.14);border-radius:10px;background:rgba(255,255,255,.06);color:#dff7eb;padding:9px 12px;font-size:12px;font-weight:700;cursor:pointer}.report-tab-list button:hover,.report-tab-list button.active{background:#079d6d;border-color:#079d6d;color:#fff}.report-results{padding:20px}.report-results-head{margin-bottom:18px}.report-results-head>strong{font-size:12px;color:#bcebd7}.report-table-wrap{overflow:auto;border:1px solid rgba(255,255,255,.10);border-radius:14px}.report-table{width:100%;min-width:820px;border-collapse:collapse}.report-table th{padding:12px;background:rgba(0,45,32,.55);color:rgba(255,255,255,.72);font-size:10px;letter-spacing:1px;text-align:left;white-space:nowrap}.report-table td{padding:12px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:rgba(255,255,255,.9);vertical-align:top}.report-table tbody tr:hover td{background:rgba(255,255,255,.035)}.report-state{padding:42px 20px;text-align:center;color:rgba(255,255,255,.62);font-size:13px}.report-state.error{color:#ffc9c9}.report-state button{display:block;margin:12px auto 0;border:0;border-radius:9px;padding:9px 13px;background:#079d6d;color:#fff;font-weight:800;cursor:pointer}@media(max-width:700px){.report-tabs-head,.report-results-head{align-items:flex-start;flex-direction:column}.report-page-heading{padding-top:0}}
+@media print{.report-card{background:white!important;color:#111!important;border:1px solid #ddd;box-shadow:none}.report-page-heading h1,.report-card h2,.report-table td{color:#111!important}.report-table th{background:#eee!important;color:#111!important}}
+
+.report-lab-filter{display:flex;align-items:center;gap:10px;margin:12px 0}.report-lab-filter label{font-size:.78rem;font-weight:700;text-transform:uppercase}.report-lab-filter select{min-width:190px;padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.12);color:inherit}
+
+
+.report-help-text{margin:7px 0 0;color:rgba(255,255,255,.65);font-size:12px}.report-audit-filter{flex-wrap:wrap}.report-audit-filter input{padding:9px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.12);color:inherit}.report-audit-filter button{border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:9px 12px;background:rgba(255,255,255,.08);color:inherit;cursor:pointer}
+@media print{.no-print{display:none!important}.report-results{margin:0;padding:0;border:0;background:#fff!important}.report-table-wrap{overflow:visible;border:0}.report-table{min-width:0;width:100%;font-size:9px}.report-table th,.report-table td{padding:6px!important;color:#111!important;overflow-wrap:anywhere}.report-table th{background:#eee!important}.report-results-head>strong{color:#111!important}.report-card small{color:#333!important}}
+
+/* Final report UI: keep the report picker and Print / Save PDF action without repeated titles. */
+.report-tabs-heading{min-width:1px;min-height:1px}
+.report-results-head-compact{display:none!important}
+.report-th-filter{display:flex;flex-direction:column;gap:6px;min-width:105px;white-space:normal}
+.report-th-filter select{width:100%;max-width:190px;min-height:30px;padding:5px 7px;border-radius:7px;border:1px solid rgba(255,255,255,.22);background:#f7fbf8;color:#173b2d;font-size:11px;font-weight:600;letter-spacing:0;text-transform:none}
+.report-th-filter select option{background:#fff;color:#173b2d}
+.report-tab-list-faculty{display:none!important}
+.report-results-compact .report-results-head{display:none!important}
+@media print{.report-th-filter select{display:none!important}.report-th-filter{display:block!important}.report-tabs-heading{display:none!important}}
+
+/* Report pagination: only the active page is shown on screen; printing still includes every filtered row. */
+.report-row-outside-page{display:none}
+.report-pagination{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;color:rgba(255,255,255,.72);font-size:12px}
+.report-pagination-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.report-pagination-controls label{font-weight:700}
+.report-pagination-controls select,.report-pagination-controls button{min-height:34px;padding:7px 10px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(0,0,0,.14);color:inherit}
+.report-pagination-controls button{cursor:pointer;font-weight:700}
+.report-pagination-controls button:disabled{opacity:.45;cursor:not-allowed}
+@media print{.report-row-outside-page{display:table-row!important}.report-pagination{display:none!important}}
+
+.report-action-group{display:flex;gap:8px;flex-wrap:wrap}.report-results-toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px}.report-results-toolbar label{font-size:12px;font-weight:800;color:#fff}.report-results-toolbar input{flex:1;min-width:230px;padding:10px 12px;border-radius:9px}.report-results-toolbar strong{font-size:12px;color:#bcebd7}.report-print-heading{display:none}.report-table{min-width:0;table-layout:auto}.report-table th{white-space:normal;overflow-wrap:anywhere}.report-table td{overflow-wrap:anywhere;word-break:normal}.report-row-outside-page{display:none}.report-results-toolbar input{background:#064b36;color:#fff}
+@media print{ @page{size:A4 landscape;margin:8mm} .clms-app-shell{padding:0!important;background:#fff!important}.report-tabs{display:none!important}.report-results{margin:0!important;padding:0!important;background:#fff!important;border:0!important;backdrop-filter:none!important}.report-results-toolbar,.report-pagination{display:none!important}.report-print-heading{display:block!important;text-align:center;margin-bottom:8px;color:#111!important}.report-print-heading h2{margin:3px 0;font-size:14px;color:#111!important}.report-table{width:100%!important;min-width:0!important;table-layout:fixed!important;border-collapse:collapse!important}.report-table th{padding:4px 5px!important;font-size:7pt!important;letter-spacing:0!important;white-space:normal!important;overflow-wrap:anywhere!important;color:#111!important;background:#eee!important;border:1px solid #bbb!important}.report-table td{padding:4px 5px!important;font-size:7pt!important;line-height:1.2!important;color:#111!important;border:1px solid #ccc!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important}.report-table-wrap{overflow:visible!important;border:0!important}.report-row-outside-page{display:table-row!important}.report-results-head-compact{display:none!important}}
+
+.report-print-all{display:none!important}
+@media print{.report-screen-table{display:none!important}.report-print-all{display:block!important}.report-print-all .report-table{display:table!important}}
+.report-action-button{border:1px solid rgba(120,255,210,.3);border-radius:10px;background:#079d6d;color:#fff;padding:10px 14px;font-weight:800;cursor:pointer}.report-action-button:hover{background:#0bb37f}
+
+.report-maintenance-kind{display:flex;align-items:center;gap:10px;margin-top:12px}.report-maintenance-kind label{font-size:12px;font-weight:700;color:#dff7eb}.report-maintenance-kind select{border:1px solid rgba(255,255,255,.14);border-radius:10px;background:rgba(0,45,32,.55);color:#f4fff9;padding:9px 12px;font-size:12px;font-weight:700;cursor:pointer}.report-maintenance-kind select:focus{outline:2px solid #079d6d}
+
+/* CP92: with the card title removed (MIS Head, Dean, Teacher) the Print PDF button stays right-aligned. */
+.report-tabs-head.report-tabs-head-actions-only{justify-content:flex-end}
+
+/* CP145 - Reports UI cleanup (screen only; the print / PDF rules above are unchanged).
+   1) Search field, record count and the PDF action share one toolbar row at desktop widths; below 980px the row wraps cleanly (search full width, count + action underneath).
+   2) Table words are no longer split in the middle (the old overflow-wrap:anywhere + min-width:0 crushed columns, worst on phones); the table keeps its natural width and scrolls inside its own wrapper.
+   3) Header cells: clearer size/weight/colour; Condition Note is centred; Cancellation Note is narrower and centred. */
+.report-tabs>.report-tab-list:first-child{margin-top:0}
+.report-tabs.report-tabs-empty{display:none}
+.report-results-toolbar .report-action-group button{border:1px solid rgba(120,255,210,.3);border-radius:10px;background:#079d6d;color:#fff;font-weight:800;cursor:pointer}.report-results-toolbar .report-action-group button:hover:not(:disabled){background:#0bb37f}.report-results-toolbar .report-action-group button:disabled{opacity:.5;cursor:not-allowed}
+@media screen{
+  .report-results-toolbar{flex-wrap:nowrap;gap:12px}
+  .report-results-toolbar label{flex:0 0 auto;white-space:nowrap}
+  .report-results-toolbar input{flex:1 1 220px;min-width:0}
+  .report-results-toolbar strong{flex:0 0 auto;white-space:nowrap}
+  .report-results-toolbar .report-action-group{flex:0 0 auto;flex-wrap:nowrap}
+  .report-results-toolbar .report-action-group button{white-space:nowrap;padding:9px 16px}
+}
+@media screen and (max-width:980px){
+  .report-results-toolbar{flex-wrap:wrap;row-gap:10px}
+  .report-results-toolbar label{flex:1 1 100%;white-space:normal}
+  .report-results-toolbar input{flex:1 1 100%}
+  .report-results-toolbar strong{flex:1 1 auto}
+  .report-results-toolbar .report-action-group{margin-left:auto}
+}
+@media screen{
+  .clms-app-shell .report-screen-table .report-table th{overflow-wrap:normal;word-break:normal;hyphens:none;white-space:normal;padding:12px 10px!important;font-size:11.5px!important;letter-spacing:.05em;line-height:1.35;color:rgba(255,255,255,.92);background:rgba(0,39,30,.35)}
+  .clms-app-shell .report-screen-table .report-table td{overflow-wrap:break-word;word-break:normal;hyphens:none;padding:12px 10px!important}
+  .clms-app-shell .report-screen-table .report-table :is(th,td).report-col-condition-note{text-align:center;min-width:140px;max-width:260px}
+  .clms-app-shell .report-screen-table .report-table :is(th,td).report-col-date{min-width:102px}
+  .clms-app-shell .report-screen-table .report-table :is(th,td).report-col-cancellation-note{text-align:center;width:190px;min-width:150px;max-width:210px}
+}
+
+/* CP148: Dean / Teacher report actions (My Reservations, Report Issue menu, Print PDF) - same size/style as the existing action buttons. */
+.report-issue-menu{position:relative;display:inline-flex}
+.report-results-toolbar .report-action-group .report-issue-menu>button{display:inline-flex;align-items:center;gap:6px}
+.report-issue-menu-list{position:absolute;top:calc(100% + 6px);right:0;z-index:30;min-width:100%;display:flex;flex-direction:column;gap:4px;padding:6px;border:1px solid rgba(120,255,210,.3);border-radius:10px;background:#064b36;box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.report-results-toolbar .report-action-group .report-issue-menu-list button{width:100%;text-align:left;border:0;border-radius:8px;background:transparent;padding:9px 14px}
+.report-results-toolbar .report-action-group .report-issue-menu-list button:hover{background:#079d6d}
+@media screen and (max-width:980px){
+  .report-results-toolbar .report-action-group:has(.report-issue-menu){flex:1 1 100%;flex-wrap:wrap;margin-left:0}
+  .report-results-toolbar .report-action-group:has(.report-issue-menu)>button,.report-results-toolbar .report-action-group:has(.report-issue-menu)>.report-issue-menu{flex:1 1 calc(50% - 8px)}
+  .report-results-toolbar .report-action-group:has(.report-issue-menu)>.report-issue-menu>button{width:100%;justify-content:center}
+  .report-issue-menu-list{left:0;right:0}
+}
+
+/* CP167: Reservations-style table, aligned toolbar, selection column and typeable pagination. */
+@media screen {
+  .clms-app-shell .report-results-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .clms-app-shell .report-results-toolbar > * { margin: 0; }
+  .clms-app-shell .report-results-toolbar input[type="search"] { flex: 1 1 240px; min-width: 0; height: 42px; box-sizing: border-box; }
+  .clms-app-shell .report-results-toolbar button, .clms-app-shell .report-action-group > button, .clms-app-shell .report-issue-menu > button { height: 42px; box-sizing: border-box; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+  .clms-app-shell .report-results-toolbar .report-maintenance-kind { display: flex; align-items: center; gap: 8px; margin: 0; }
+  .clms-app-shell .report-results-toolbar .report-maintenance-kind select { height: 42px; box-sizing: border-box; }
+  .clms-app-shell .report-action-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .clms-app-shell .report-record-count { white-space: nowrap; }
+  .clms-app-shell .report-screen-table { width: 100%; overflow: auto; }
+  .clms-app-shell .report-screen-table .report-table { width: 100%; border-collapse: collapse; min-width: 980px; }
+  .clms-app-shell .report-screen-table .report-table th, .clms-app-shell .report-screen-table .report-table td { padding: 14px 13px !important; border-bottom: 1px solid rgba(255,255,255,.11); color: #edf8f4; font-size: 13px; text-align: left; vertical-align: middle; white-space: nowrap; }
+  .clms-app-shell .report-screen-table .report-table th { font-size: 11px !important; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.68); background: rgba(0,39,30,.35); }
+  .clms-app-shell .report-screen-table .report-table tbody tr:hover { background: rgba(255,255,255,.035); }
+  .clms-app-shell .report-screen-table .report-table tbody tr.report-row-selected { background: rgba(7,157,109,.16); }
+  .clms-app-shell .report-screen-table .report-table td.report-col-cancellation-note, .clms-app-shell .report-screen-table .report-table td.report-col-condition-note, .clms-app-shell .report-screen-table .report-table th.report-col-cancellation-note, .clms-app-shell .report-screen-table .report-table th.report-col-condition-note { text-align: center; white-space: normal; }
+  .clms-app-shell .report-screen-table .report-table .report-col-check { width: 44px; text-align: center; }
+  .clms-app-shell .report-screen-table input[type="checkbox"] { width: 16px; height: 16px; accent-color: #079d6d; }
+  .clms-app-shell .report-page-jump { display: inline-flex; align-items: center; gap: 6px; }
+  .clms-app-shell .report-page-jump input { width: 56px; height: 36px; box-sizing: border-box; text-align: center; }
+  .clms-app-shell .report-pagination button { height: 36px; }
+}
+@media screen and (max-width: 640px) {
+  .clms-app-shell .report-results-toolbar > *, .clms-app-shell .report-action-group { flex: 1 1 100%; }
+  .clms-app-shell .report-action-group > button, .clms-app-shell .report-results-toolbar > button { flex: 1 1 auto; }
+}
+@media print { .report-col-check { display: none !important; } }
+@media screen {
+  .clms-app-shell .report-results-toolbar .report-select-all { background: rgba(255,255,255,.08); color: #edf8f4; border: 1px solid rgba(255,255,255,.22); border-radius: 10px; font-weight: 700; cursor: pointer; }
+  .clms-app-shell .report-results-toolbar .report-select-all:hover:not(:disabled) { background: rgba(255,255,255,.14); }
+  .clms-app-shell .report-results-toolbar .report-select-all:disabled { opacity: .5; cursor: not-allowed; }
+}

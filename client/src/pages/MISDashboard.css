@@ -1,0 +1,13 @@
+.clean-role-dashboard-mis{min-height:calc(100vh - 185px);display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;text-align:left;padding:22px 24px 48px;box-sizing:border-box}.mis-dashboard-copy{width:min(100%,1220px);margin:0 auto;padding:8px 12px 0;position:relative;z-index:2}.clean-role-dashboard-mis h1{margin:0;color:#f4fff9;font-size:clamp(34px,4.5vw,58px);line-height:1.06;text-shadow:0 8px 28px rgba(0,0,0,.28)}.mis-stat-row{width:min(100%,1080px);margin:28px auto 0;display:grid;gap:18px;position:relative;z-index:2}.mis-stat-row-two{grid-template-columns:repeat(2,minmax(0,1fr))}.mis-stat-row>div{min-height:140px;padding:22px 24px;display:flex;flex-direction:column;justify-content:center;border:1px solid rgba(255,255,255,.2);border-radius:16px;background:rgba(7,74,54,.68);backdrop-filter:blur(12px);box-shadow:0 14px 34px rgba(0,0,0,.14)}.mis-stat-row span{display:block;font-size:14px;color:rgba(244,255,249,.86)}.mis-stat-row strong{display:block;margin-top:10px;font-size:42px;line-height:1.05;color:#fff}.mis-dashboard-error{width:min(100%,1080px);margin:18px auto 0;padding:12px 14px;border-radius:10px;background:rgba(135,30,30,.4);border:1px solid rgba(255,210,210,.35);color:#fff}@media(max-width:620px){.clean-role-dashboard-mis{padding:18px 10px 30px}.mis-stat-row-two{grid-template-columns:1fr}.mis-stat-row>div{min-height:108px}.mis-stat-row strong{font-size:36px}}
+
+.mis-dashboard-copy{text-align:center}.mis-dashboard-copy h1{text-align:center;margin-left:auto;margin-right:auto}
+
+/* CP129: context/welcome box matching the MIS Staff dashboard card */
+.mis-role-dashboard{min-height:calc(100vh - 210px);display:flex;flex-direction:column;align-items:stretch;text-align:center;padding:30px 20px 40px}
+.mis-dashboard-welcome{width:min(100%,1000px);margin:8px auto 0;padding:38px 34px;border:1px solid rgba(255,255,255,.2);border-radius:22px;background:rgba(0,56,41,.34);backdrop-filter:blur(10px);box-shadow:0 24px 60px rgba(0,0,0,.16);text-align:center;box-sizing:border-box}
+.mis-dashboard-welcome .mis-dashboard-copy{width:100%;padding:0;margin:0}
+.mis-dashboard-welcome h1{font-size:clamp(32px,4vw,52px);line-height:1.12;text-shadow:0 8px 28px rgba(0,0,0,.25)}
+.mis-dashboard-welcome .mis-stat-row{width:100%;margin:30px auto 0;gap:16px}
+.mis-dashboard-welcome .mis-stat-row>div{min-height:126px;padding:20px;align-items:center;text-align:center;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:rgba(0,36,27,.44);backdrop-filter:none;box-shadow:none}
+.mis-dashboard-welcome .mis-dashboard-error{width:100%;margin:18px 0 0}
+@media(max-width:600px){.mis-role-dashboard{padding:20px 8px}.mis-dashboard-welcome{padding:25px 16px}}

@@ -1,0 +1,738 @@
+* {
+    box-sizing:border-box;
+}
+.equipment-page {
+    position:relative;
+    min-height:100vh;
+    padding:22px 28px 55px;
+    overflow-x:hidden;
+    color:var(--dashboard-ink);
+    background:url('/schoolbg.jpg') center/cover no-repeat;
+}
+.equipment-overlay {
+    position:fixed;
+    inset:0;
+    z-index:0;
+    background:linear-gradient(120deg,rgba(5,39,25,.9),rgba(7,48,34,.78),rgba(8,22,17,.68));
+    pointer-events:none;
+}
+.equipment-header,.equipment-layout,.equipment-footer {
+    position:relative;
+    z-index:2;
+}
+.equipment-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:78px;
+    padding:12px 22px;
+    border:1px solid var(--dashboard-line);
+    border-radius:19px;
+    background:rgba(255,255,255,.16);
+    box-shadow:0 15px 40px rgba(6,24,16,.3);
+    backdrop-filter:blur(18px);
+}
+.equipment-brand {
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:0;
+    border:0;
+    background:transparent;
+    color:inherit;
+    text-align:left;
+    cursor:pointer;
+}
+.equipment-brand-logo {
+    display:grid;
+    place-items:center;
+    width:53px;
+    height:53px;
+    overflow:hidden;
+    border-radius:50%;
+    background:#f5faf7;
+}
+.equipment-brand-logo img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+.equipment-brand strong {
+    display:block;
+    font-size:24px;
+    line-height:1.15;
+}
+.equipment-brand small,.equipment-user small {
+    display:block;
+    margin-top:4px;
+    color:var(--dashboard-ink-soft);
+    font-size:13px;
+}
+.equipment-user {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:6px 8px 6px 6px;
+    border-radius:15px;
+    background:rgba(255,255,255,.1);
+}
+.equipment-avatar {
+    display:grid;
+    place-items:center;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:#f5faf7;
+    color:#354a78;
+    font-size:20px;
+}
+.equipment-user-info strong {
+    font-size:14px;
+}
+.equipment-layout {
+    display:flex;
+    gap:22px;
+    min-height:calc(100vh - 100px);
+    margin-top:20px;
+}
+.equipment-sidebar {
+    width:245px;
+    min-height:625px;
+    flex-shrink:0;
+    padding:24px 15px;
+    border:1px solid var(--dashboard-line);
+    border-radius:19px;
+    background:var(--dashboard-panel-deep);
+    box-shadow:0 15px 40px rgba(6,24,16,.25);
+    backdrop-filter:blur(18px);
+}
+.equipment-sidebar-title {
+    padding:0 13px 14px;
+    color:var(--dashboard-ink-muted);
+    font-size:12px;
+    font-weight:750;
+    letter-spacing:.14em;
+    text-align:center;
+}
+.equipment-nav-button {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    min-height:50px;
+    margin-bottom:7px;
+    padding:0 14px;
+    border:1px solid transparent;
+    border-radius:12px;
+    background:transparent;
+    color:var(--dashboard-ink-soft);
+    font-size:14px;
+    font-weight:550;
+    cursor:pointer;
+}
+.equipment-nav-button:hover,.equipment-nav-button:focus-visible {
+    border-color:var(--dashboard-line-soft);
+    background:rgba(255,255,255,.15);
+    color:var(--dashboard-ink);
+    outline:0;
+}
+.equipment-nav-button.active {
+    border-color:rgba(255,255,255,.2);
+    background:var(--dashboard-green);
+    color:var(--dashboard-ink);
+}
+.equipment-nav-button.logout:hover {
+    background:rgba(180,50,50,.3);
+}
+.equipment-sidebar-divider {
+    width:90%;
+    height:1px;
+    margin:24px auto;
+    background:var(--dashboard-line-soft);
+}
+.equipment-main {
+    flex:1;
+    min-width:0;
+    padding:17px 20px 25px;
+}
+.equipment-heading {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:105px;
+    margin-bottom:24px;
+}
+.equipment-heading > div {
+    width:100%;
+    text-align:center;
+}
+.equipment-heading .equipment-primary-button {
+    position:absolute;
+    right:0;
+    bottom:0;
+}
+.equipment-eyebrow {
+    margin:0 0 7px;
+    color:var(--dashboard-ink-muted);
+    font-size:12px;
+    font-weight:750;
+    letter-spacing:.14em;
+}
+.equipment-heading h1 {
+    margin:0;
+    font-size:clamp(34px,4vw,52px);
+    line-height:1.05;
+    text-shadow:0 4px 18px rgba(6,24,16,.35);
+}
+.equipment-heading p:last-child {
+    margin:10px 0 0;
+    color:var(--dashboard-ink-soft);
+    font-size:15px;
+}
+.equipment-primary-button,.equipment-secondary-button {
+    min-height:46px;
+    padding:0 18px;
+    border:1px solid transparent;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+.equipment-primary-button {
+    background:var(--dashboard-green);
+    color:var(--dashboard-ink);
+    box-shadow:0 10px 25px rgba(6,24,16,.22);
+}
+.equipment-primary-button:hover:not(:disabled) {
+    background:var(--dashboard-green-bright);
+    transform:translateY(-2px);
+}
+.equipment-primary-button:disabled {
+    opacity:.45;
+    cursor:not-allowed;
+}
+.equipment-secondary-button {
+    border-color:var(--dashboard-line);
+    background:rgba(255,255,255,.08);
+    color:var(--dashboard-ink-soft);
+}
+.equipment-alert {
+    margin-bottom:16px;
+    padding:12px 16px;
+    border:1px solid rgba(255,255,255,.24);
+    border-radius:12px;
+    background:rgba(255,255,255,.14);
+}
+.equipment-alert.error {
+    background:rgba(120,30,30,.32);
+    border-color:rgba(255,170,170,.45);
+}
+.equipment-stats {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+    margin-bottom:18px;
+}
+.equipment-stats>div {
+    padding:17px 19px;
+    border:1px solid var(--dashboard-line);
+    border-radius:16px;
+    background:rgba(255,255,255,.12);
+    box-shadow:0 15px 35px rgba(6,24,16,.14);
+}
+.equipment-stats span {
+    display:block;
+    color:var(--dashboard-ink-muted);
+    font-size:13px;
+}
+.equipment-stats strong {
+    display:block;
+    margin-top:3px;
+    font-size:31px;
+    line-height:1;
+}
+.equipment-panel {
+    overflow:hidden;
+    border:1px solid var(--dashboard-line);
+    border-radius:19px;
+    background:rgba(4,35,25,.56);
+    box-shadow:0 20px 50px rgba(6,24,16,.2);
+    backdrop-filter:blur(17px);
+}
+.equipment-toolbar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    padding:22px 23px;
+    border-bottom:1px solid var(--dashboard-line-soft);
+}
+.equipment-toolbar h2 {
+    margin:0;
+    font-size:21px;
+}
+.equipment-toolbar p {
+    margin:4px 0 0;
+    color:var(--dashboard-ink-muted);
+    font-size:13px;
+}
+.equipment-filters {
+    display:flex;
+    gap:9px;
+}
+.equipment-search {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    width:210px;
+    padding:0 12px;
+    border:1px solid var(--dashboard-line);
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    color:var(--dashboard-ink-muted);
+}
+.equipment-search input,.equipment-filters select {
+    min-height:41px;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:var(--dashboard-ink);
+    font:inherit;
+}
+.equipment-search input {
+    width:100%;
+}
+.equipment-filters select {
+    padding:0 9px;
+    border:1px solid var(--dashboard-line);
+    border-radius:10px;
+    background:rgba(12,61,43,.8);
+    font-size:13px;
+}
+.equipment-table-wrap {
+    overflow-x:auto;
+}
+.equipment-table {
+    width:100%;
+    min-width:890px;
+    border-collapse:collapse;
+}
+.equipment-table th {
+    padding:14px 18px;
+    color:var(--dashboard-ink-muted);
+    font-size:11px;
+    text-align:left;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+}
+.equipment-table td {
+    padding:16px 18px;
+    border-top:1px solid var(--dashboard-line-soft);
+    color:var(--dashboard-ink-soft);
+    font-size:14px;
+    vertical-align:middle;
+}
+.equipment-table td strong,.equipment-table td small {
+    display:block;
+}
+.equipment-table td small {
+    margin-top:4px;
+    color:var(--dashboard-ink-muted);
+    font-size:12px;
+}
+.equipment-status {
+    display:inline-flex;
+    padding:5px 9px;
+    border-radius:999px;
+    background:rgba(119,203,151,.18);
+    color:#b4f0c9;
+    font-size:12px;
+    font-weight:700;
+    white-space:nowrap;
+}
+.equipment-status.inactive {
+    background:rgba(190,200,195,.18);
+    color:#d3dcd7;
+}
+.equipment-status.under-repair,.equipment-status.damaged {
+    background:rgba(245,180,90,.2);
+    color:#ffd59b;
+}
+.equipment-status.missing,.equipment-status.retired,.equipment-status.not-working {
+    background:rgba(255,135,135,.18);
+    color:#ffc1c1;
+}
+.equipment-row-actions {
+    display:flex;
+    gap:7px;
+}
+.equipment-row-actions button {
+    padding:7px 10px;
+    border:1px solid var(--dashboard-line);
+    border-radius:8px;
+    background:rgba(255,255,255,.08);
+    color:var(--dashboard-ink-soft);
+    font-size:12px;
+    cursor:pointer;
+}
+.equipment-row-actions .danger:hover {
+    background:rgba(180,50,50,.26);
+}
+.equipment-empty {
+    padding:55px 20px!important;
+    color:var(--dashboard-ink-muted)!important;
+    text-align:center;
+}
+.equipment-muted {
+    color:var(--dashboard-ink-muted);
+}
+.equipment-footer,.maintenance-footer {
+    margin-top:17px;
+    color:var(--dashboard-ink-muted);
+    font-size:12px;
+    text-align:center;
+}
+.equipment-modal-backdrop {
+    position:fixed;
+    inset:0;
+    z-index:10;
+    display:grid;
+    place-items:center;
+    padding:22px;
+    background:rgba(2,17,11,.7);
+    backdrop-filter:blur(8px);
+}
+.equipment-modal {
+    width:min(720px,100%);
+    max-height:calc(100vh - 44px);
+    overflow:auto;
+    padding:25px;
+    border:1px solid var(--dashboard-line);
+    border-radius:20px;
+    background:rgba(5,42,30,.96);
+    box-shadow:0 25px 80px rgba(0,0,0,.38);
+}
+.equipment-modal-header {
+    position: relative;
+    display: block;
+    margin-bottom: 22px;
+    text-align: center;
+}
+
+.equipment-modal-header > div {
+    width: 100%;
+}
+
+.equipment-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.equipment-modal h2 {
+    margin:0;
+    font-size:28px;
+}
+.equipment-close {
+    width:36px;
+    height:36px;
+    border:1px solid var(--dashboard-line);
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    color:var(--dashboard-ink);
+    font-size:25px;
+    cursor:pointer;
+}
+.equipment-form-grid {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+}
+.equipment-form-grid label {
+    display:grid;
+    gap:7px;
+    color:var(--dashboard-ink-soft);
+    font-size:13px;
+    font-weight:650;
+}
+.equipment-form-grid select {
+    color-scheme: dark;
+}
+.equipment-form-grid select option {
+    background: #0b3d2c;
+    color: #f5fff9;
+}
+
+.equipment-form-grid input,.equipment-form-grid select,.equipment-form-grid textarea {
+    width:100%;
+    min-height:43px;
+    padding:0 12px;
+    border:1px solid var(--dashboard-line);
+    border-radius:10px;
+    outline:0;
+    background:rgba(255,255,255,.1);
+    color:var(--dashboard-ink);
+    font:inherit;
+    font-size:14px;
+}
+.equipment-form-grid textarea {
+    padding-top:10px;
+    resize:vertical;
+}
+.equipment-full-field {
+    grid-column:1/-1;
+}
+.equipment-modal-actions {
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:24px;
+    padding-top:20px;
+    border-top:1px solid var(--dashboard-line-soft);
+}
+@media(max-width:1000px) {
+    .equipment-page {
+        padding:18px 20px 50px;
+    }
+    .equipment-sidebar {
+        width:205px;
+    }
+    .equipment-main {
+        padding:15px 10px;
+    }
+}
+@media(max-width:760px) {
+    .equipment-layout {
+        flex-direction:column;
+    }
+    .equipment-sidebar {
+        display:flex;
+        flex-wrap:wrap;
+        width:100%;
+        min-height:auto;
+        gap:7px;
+        padding:14px;
+    }
+    .equipment-sidebar-title,.equipment-sidebar-divider {
+        display:none;
+    }
+    .equipment-nav-button {
+        flex:1 1 150px;
+        margin:0;
+    }
+    .equipment-main {
+        padding:10px 0;
+    }
+    .equipment-heading {
+        align-items:stretch;
+        flex-direction:column;
+    }
+    .equipment-heading > div {
+        text-align:center;
+    }
+    .equipment-heading .equipment-primary-button {
+        position:static;
+        width:100%;
+        margin-top:18px;
+    }
+}
+@media(max-width:560px) {
+    .equipment-page {
+        padding:12px 12px 45px;
+    }
+    .equipment-header {
+        padding:10px 13px;
+    }
+    .equipment-brand-logo {
+        width:43px;
+        height:43px;
+    }
+    .equipment-brand small,.equipment-user-info {
+        display:none;
+    }
+    .equipment-avatar {
+        width:40px;
+        height:40px;
+    }
+    .equipment-stats {
+        grid-template-columns:1fr;
+    }
+    .equipment-toolbar {
+        align-items:stretch;
+        flex-direction:column;
+    }
+    .equipment-filters {
+        flex-direction:column;
+    }
+    .equipment-search {
+        width:100%;
+    }
+    .equipment-form-grid {
+        grid-template-columns:1fr;
+    }
+    .equipment-full-field {
+        grid-column:auto;
+    }
+    .equipment-modal {
+        padding:20px;
+    }
+}
+.equipment-page {
+    animation: dashboardFadeIn 0.8s ease-out both;
+}
+
+.equipment-header {
+    animation: dashboardHeaderIn 0.7s var(--dashboard-ease) both;
+}
+
+.equipment-sidebar {
+    animation: dashboardSidebarIn 0.8s var(--dashboard-ease) 0.15s both;
+}
+
+.equipment-main {
+    animation: dashboardMainIn 0.8s var(--dashboard-ease) 0.2s both;
+}
+
+.equipment-nav-button {
+    transition:
+        transform 0.25s var(--dashboard-ease),
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.equipment-nav-button:hover,
+.equipment-nav-button:focus-visible {
+    transform: translateY(2px);
+}
+/* MIS uses the shared MIS portal shell. Keep the asset page inside that shell
+   instead of rendering a second Inventory-style header/sidebar. */
+.mis-shell-main .equipment-page {
+    min-height: auto;
+    padding: 0;
+    background: transparent;
+}
+.mis-shell-main .equipment-overlay {
+    display: none;
+}
+.mis-shell-main .equipment-main-mis {
+    width: 100%;
+    padding: 4px 0 28px;
+}
+.mis-shell-main .equipment-heading {
+    min-height: 120px;
+}
+@media (max-width: 760px) {
+    .mis-shell-main .equipment-main-mis {
+        padding: 0 0 20px;
+    }
+}
+.equipment-form-grid select,.equipment-filters select{background-color:#0b3d2c !important;color:#f5fff9 !important;color-scheme:dark}
+.equipment-form-grid select option,.equipment-filters select option{background-color:#0b3d2c !important;color:#f5fff9 !important}
+.equipment-filters label{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700}.equipment-filters select{padding:9px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.14);background:rgba(0,45,32,.65);color:#fff}
+
+/* The Assets & Equipment heading is positioned at the upper-left of the content. */
+.equipment-heading{justify-content:flex-start;align-items:center}
+.equipment-heading h1{position:absolute;left:0;top:50%;transform:translateY(-50%);margin:0;color:#f4fff9;font-size:clamp(26px,3vw,38px);font-weight:800;letter-spacing:-.02em}
+@media(max-width:760px){.equipment-heading{min-height:130px}.equipment-heading h1{top:8px;transform:none;max-width:calc(100% - 4px)}.equipment-heading .equipment-primary-button{bottom:0}}
+
+.equipment-search-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px}.equipment-search-toolbar label{font-size:12px;font-weight:800}.equipment-search-toolbar input{flex:1;min-width:240px;padding:10px 12px;border-radius:9px}.equipment-search-toolbar button,.equipment-pagination button,.equipment-pagination select{padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#064b36;color:#fff}.equipment-pagination{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;padding:12px 0;font-size:12px}.equipment-pagination button{cursor:pointer}.equipment-pagination button:disabled{opacity:.45;cursor:not-allowed}
+
+.option-add-button, .computer-configurable-input button { margin-top: 6px; font-size: 0.78rem; padding: 5px 8px; cursor: pointer; }
+.computer-configurable-input { display: flex; gap: 6px; align-items: center; }
+.computer-configurable-input input { min-width: 0; flex: 1; }
+.equipment-heading-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}.equipment-danger-button{border:1px solid rgba(255,120,120,.35);border-radius:9px;background:#9e2f2f;color:#fff;padding:10px 13px;font-weight:800;cursor:pointer}.equipment-table th input[type="checkbox"],.equipment-table td input[type="checkbox"]{width:16px;height:16px;accent-color:#079d6d;cursor:pointer}@media print{.equipment-heading-actions,.equipment-table th input[type="checkbox"],.equipment-table td input[type="checkbox"]{display:none!important}}
+
+/* ===== Assets & Equipment top buttons: layout fix =====
+   Earlier rules made every .equipment-primary-button inside the heading position:absolute (right/bottom 0),
+   so all action buttons stacked on top of each other. Normal flex flow with wrapping replaces that. */
+.equipment-heading{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;min-height:0;margin-bottom:20px;position:relative}
+.equipment-heading h1{position:static;transform:none;margin:0;flex:1 1 260px;min-width:0;max-width:100%}
+.equipment-heading .equipment-heading-actions{flex:1 1 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px}
+.equipment-heading .equipment-heading-actions > button,.equipment-heading .equipment-heading-actions .equipment-primary-button,.equipment-heading .equipment-heading-actions .equipment-danger-button{position:static;inset:auto;width:auto;margin:0;min-height:42px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;white-space:nowrap;transform:none}
+.equipment-heading .equipment-heading-actions .equipment-primary-button:hover:not(:disabled){transform:none}
+@media(max-width:760px){
+  .equipment-heading{flex-direction:row;align-items:flex-start;min-height:0}
+  .equipment-heading h1{flex:1 1 100%}
+  .equipment-heading .equipment-heading-actions{flex:1 1 100%;justify-content:flex-start}
+  .equipment-heading .equipment-heading-actions > button,.equipment-heading .equipment-heading-actions .equipment-primary-button,.equipment-heading .equipment-heading-actions .equipment-danger-button{flex:1 1 calc(50% - 8px);min-width:0;white-space:normal}
+}
+
+/* CP9: on desktop the title and the action buttons share one row (the title no longer grows to full width and pushes the
+   buttons onto a second line). The buttons stay right-aligned and wrap among themselves only when space runs out. */
+@media(min-width:761px){
+  .equipment-heading{flex-wrap:nowrap}
+  .equipment-heading h1{flex:0 0 auto;white-space:nowrap}
+  .equipment-heading .equipment-heading-actions{flex:1 1 0;min-width:0}
+}
+
+/* CP82: the shared File Actions wrapper has margin-left:auto, which (inside this full-width flex row) pushed "+ Add Equipment" to the far left,
+   next to the page title, away from the other action buttons. Inside the Equipment heading the group is right-aligned as one set again,
+   with "+ Add Equipment" first, like the other pages' toolbars. */
+.equipment-heading .equipment-heading-actions .file-actions { margin-left: 0; }
+
+/* CP132: Equipment summary statistics in a green translucent context box (matches MIS dashboards / Laboratories / Computers) */
+.equipment-stats { width:min(100%,1000px); margin:0 auto 18px; padding:22px 24px; box-sizing:border-box; gap:16px; border:1px solid rgba(255,255,255,.2); border-radius:22px; background:rgba(0,56,41,.34); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); box-shadow:0 24px 60px rgba(0,0,0,.16); }
+.clms-app-shell.clms-app-shell .equipment-stats.equipment-stats>div { min-width:0; padding:16px 18px; text-align:center; border:1px solid rgba(255,255,255,.18); border-radius:16px; background:rgba(0,36,27,.44); box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; }
+.equipment-stats span { color:rgba(244,255,249,.86); font-weight:700; overflow-wrap:anywhere; }
+.equipment-stats strong { margin-top:8px; color:#fff; }
+@media (max-width:640px) {
+    .equipment-stats { padding:14px 10px; gap:8px; border-radius:18px; }
+    .clms-app-shell.clms-app-shell .equipment-stats.equipment-stats>div { padding:12px 10px; border-radius:12px; }
+}
+
+/* CP149: Equipment - search + action buttons share ONE toolbar row on wide desktop (>=1500px viewport; the 245px sidebar leaves ~1170px+); below that the actions wrap as a whole group onto their own row, and on phones the buttons go two per row. Markup moved only; handlers unchanged. */
+.clms-app-shell .equipment-search-toolbar .toolbar-inline-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:10px;margin:0 0 0 auto;padding:0;flex:1 1 100%}
+.clms-app-shell .equipment-search-toolbar .toolbar-inline-actions>button,.clms-app-shell .equipment-search-toolbar .toolbar-inline-actions>.file-actions>button{min-height:44px;box-sizing:border-box;white-space:nowrap}
+@media screen and (min-width:1500px){
+  .clms-app-shell .equipment-search-toolbar{flex-wrap:nowrap}
+  .clms-app-shell .equipment-search-toolbar input[type=search]{flex:1 1 200px;min-width:0}
+  .clms-app-shell .equipment-search-toolbar .toolbar-inline-actions{flex:0 0 auto;flex-wrap:nowrap}
+}
+@media screen and (max-width:560px){
+  .clms-app-shell .equipment-search-toolbar .toolbar-inline-actions{justify-content:flex-start}
+  .clms-app-shell .equipment-search-toolbar .toolbar-inline-actions>button{flex:1 1 calc(50% - 10px)}
+}
+/* CP149: keep the action buttons in the solid CLMS green they had in the title bar (the search-row button rule would otherwise dim them). */
+.clms-app-shell .equipment-search-toolbar .toolbar-inline-actions>button:not(.clms-delete-all):not(.btn-delete):not(.equipment-danger-button),.clms-app-shell .equipment-search-toolbar .toolbar-inline-actions .file-actions>button{background:#079d6d;border:1px solid rgba(120,255,210,.3);border-radius:10px;color:#fff;font-weight:700;padding:0 16px;cursor:pointer}
+.clms-app-shell .equipment-search-toolbar .toolbar-inline-actions>button:not(.clms-delete-all):not(.btn-delete):not(.equipment-danger-button):hover:not(:disabled),.clms-app-shell .equipment-search-toolbar .toolbar-inline-actions .file-actions>button:hover{background:#0bb37f}
+.clms-app-shell .equipment-search-toolbar .toolbar-inline-actions button:disabled{opacity:.45;cursor:not-allowed}
+
+/* =====================================================================================================================
+   CP164 - Equipment revisions (Super Admin + MIS Staff). Everything is scoped to .equipment-page so no other module changes.
+   Panel / table / buttons copy the Reservations screen (glass card, uppercase header row, Select All / Delete All buttons).
+   ===================================================================================================================== */
+.equipment-page .equipment-reservations-style{overflow:hidden}
+/* one aligned line: search + context boxes + action buttons (wraps only on narrow screens) */
+.equipment-page .equipment-toolbar-line{display:flex;align-items:center;gap:10px;margin:0 0 14px;flex-wrap:nowrap}
+.equipment-page .equipment-toolbar-line input[type="search"]{flex:1 1 180px;min-width:120px;height:40px;box-sizing:border-box;padding:0 12px;border-radius:10px}
+.equipment-page .equipment-context-boxes{display:flex;align-items:stretch;gap:8px;flex:0 0 auto}
+.equipment-page .equipment-context-boxes>div{display:flex;flex-direction:column;justify-content:center;align-items:center;height:40px;box-sizing:border-box;min-width:78px;padding:0 10px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:rgba(0,36,27,.44);white-space:nowrap}
+.equipment-page .equipment-context-boxes span{font-size:9px;line-height:1.1;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(244,255,249,.8)}
+.equipment-page .equipment-context-boxes strong{margin:0;font-size:15px;line-height:1.1;color:#fff}
+/* same look as the Reservations "Select All / Clear Selection" (.reservation-refresh) and "Delete All" (.reservation-delete-all) buttons */
+.equipment-page .equipment-line-button{flex:0 0 auto;height:40px;box-sizing:border-box;margin:0;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;line-height:1;border:1px solid rgba(255,255,255,.2);border-radius:10px;background:rgba(255,255,255,.08);color:#fff;font-weight:700;font-size:13px;cursor:pointer}
+.equipment-page .equipment-line-button:hover:not(:disabled){background:rgba(255,255,255,.16)}
+.equipment-page .equipment-line-button.equipment-line-delete{border:1px solid rgba(255,200,200,.5);background:#b52f36;font-weight:800}
+.equipment-page .equipment-line-button:disabled{opacity:.5;cursor:not-allowed}
+.equipment-page .equipment-toolbar-line .file-actions-menu,.equipment-page .equipment-toolbar-line .file-actions-menu>button{height:40px;box-sizing:border-box;margin:0}
+@media (max-width:1180px){.equipment-page .equipment-toolbar-line{flex-wrap:wrap}.equipment-page .equipment-toolbar-line input[type="search"]{flex:1 1 100%}}
+/* Reservations-style table */
+.equipment-page .equipment-table-wrap{width:100%;overflow:auto;background:transparent}
+.equipment-page .equipment-table{width:100%;border-collapse:collapse;min-width:980px;background:transparent}
+.equipment-page .equipment-table th,.equipment-page .equipment-table td{padding:14px 13px;border-bottom:1px solid rgba(255,255,255,.11);text-align:left;color:#edf8f4;font-size:13px;vertical-align:middle;background:transparent}
+.equipment-page .equipment-table th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.68);background:rgba(0,39,30,.35)}
+.equipment-page .equipment-table tbody tr:hover{background:rgba(255,255,255,.035)}
+.equipment-page .equipment-table input[type=checkbox]{width:16px;height:16px}
+/* pagination: Previous / typeable page number / Next */
+.equipment-page .equipment-pagination{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:12px}
+.equipment-page .equipment-pagination>span:first-child{margin-right:auto}
+.equipment-page .equipment-pagination button{height:36px;padding:0 14px;border:1px solid rgba(255,255,255,.2);border-radius:9px;background:rgba(255,255,255,.08);color:#fff;font-weight:700;cursor:pointer}
+.equipment-page .equipment-pagination button:disabled{opacity:.45;cursor:not-allowed}
+.equipment-page .equipment-page-jump{display:inline-flex;align-items:center;gap:6px}
+.equipment-page .equipment-page-jump input{width:56px;height:36px;box-sizing:border-box;padding:0 8px;text-align:center;border-radius:9px}
+
+/* CP170: the three summary counters must fit narrow phones (they overflowed a 320px screen by ~10px). */
+@media (max-width: 640px) {
+  .equipment-page .equipment-context-boxes { flex: 1 1 100%; width: 100%; min-width: 0; }
+  .equipment-page .equipment-context-boxes > div { flex: 1 1 0; min-width: 0; height: auto; min-height: 40px; padding: 4px 6px; text-align: center; }
+  .equipment-page .equipment-context-boxes span { overflow-wrap: anywhere; font-size: 8.5px; }
+}

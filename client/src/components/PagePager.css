@@ -1,0 +1,8 @@
+/* CP187: layout fallback for the shared pager; each page's own pagination class (if passed) still applies. */
+.clms-pager { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.clms-pager .clms-pager-summary { margin-right: auto; }
+.clms-pager button { height: 36px; padding: 0 14px; border: 1px solid rgba(255,255,255,.2); border-radius: 9px; background: rgba(255,255,255,.08); color: #fff; font-weight: 700; cursor: pointer; }
+.clms-pager button:disabled { opacity: .45; cursor: not-allowed; }
+.clms-pager .clms-page-jump { display: inline-flex; align-items: center; gap: 6px; }
+.clms-pager .clms-page-jump input { width: 56px; height: 36px; box-sizing: border-box; padding: 0 8px; text-align: center; border-radius: 9px; }
+@media (max-width: 560px) { .clms-pager { justify-content: center; } .clms-pager .clms-pager-summary { flex: 1 0 100%; text-align: center; margin-right: 0; } }

@@ -1,0 +1,62 @@
+.holiday-card{color:#edf8f2;border-radius:16px;padding:18px}
+.holiday-toolbar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
+.holiday-toolbar small{display:block;font-size:11px;letter-spacing:.08em;color:#567064}
+.holiday-toolbar strong{font-size:18px}
+.holiday-year{display:flex;align-items:center;gap:6px}
+.holiday-year button,.holiday-actions button,.holiday-row-actions button,.holiday-removed button,.holiday-modal-actions button,.holiday-state button{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);color:#fff;border-radius:8px;padding:8px 12px;font:inherit;font-size:13px;cursor:pointer;transition:background .2s ease}
+.holiday-year button:hover,.holiday-actions button:hover,.holiday-row-actions button:hover,.holiday-removed button:hover,.holiday-state button:hover{background:rgba(255,255,255,.2)}
+.holiday-year input{width:84px;padding:8px;border:1px solid #b9cfc1;border-radius:8px;text-align:center;font:inherit}
+.holiday-actions{display:flex;flex-wrap:wrap;gap:8px}
+button.holiday-primary{background:#07875f;border-color:rgba(255,255,255,.25);color:#fff;font-weight:700}
+.holiday-row-actions button.danger{border-color:rgba(255,160,160,.3);background:rgba(180,50,50,.25);color:#ffc9c9}
+.holiday-note{margin:12px 0;font-size:13px;color:rgba(237,248,242,.8)}
+.holiday-state{padding:24px;text-align:center}.holiday-state.error{color:#ffb4ab}
+.holiday-table-wrap{overflow-x:auto}
+.holiday-table{width:100%;border-collapse:collapse;font-size:13px}
+.holiday-table th,.holiday-table td{padding:9px 10px;text-align:left;vertical-align:top}
+.holiday-table th{font-size:12px}
+.holiday-source{max-width:260px;color:rgba(237,248,242,.72);font-size:12px}
+.holiday-row-actions{white-space:nowrap}.holiday-row-actions button+button{margin-left:6px}
+.holiday-chip{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:#e8eef9;color:#254a8a}
+.holiday-chip.regular{background:#fde8e6;color:#a1352b}.holiday-chip.special_non_working{background:#fff1d9;color:#8a5a00}.holiday-chip.special_working{background:#dff3e8;color:#1f6b47}
+.holiday-closed{color:#ffb4ab;font-weight:700}.holiday-open{color:#8ff0bd;font-weight:700}
+.holiday-verified{color:#8ff0bd}.holiday-unverified{color:#ffd48a}
+.holiday-empty{text-align:center;color:rgba(237,248,242,.72);padding:22px}
+.holiday-removed{margin-top:14px;font-size:13px}.holiday-removed ul{margin:8px 0 0;padding-left:18px}.holiday-removed li{margin:4px 0}
+.holiday-modal-backdrop{position:fixed;inset:0;z-index:3500;background:rgba(0,0,0,.5);display:grid;place-items:center;padding:16px}
+.holiday-modal{width:min(440px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#0a6b4a;color:#fff;border-radius:14px;padding:20px;display:grid;gap:12px}
+.holiday-modal h2{margin:0;font-size:18px}
+.holiday-modal label{display:grid;gap:4px;font-size:13px;font-weight:600}
+.holiday-modal input:not([type=checkbox]),.holiday-modal select{padding:9px;border:1px solid rgba(255,255,255,.25);border-radius:8px;font:inherit;font-weight:400}
+.holiday-check{display:flex!important;align-items:center;gap:8px}
+.holiday-warning{margin:0;font-size:12px;color:#8a5a00;background:#fff6e3;border-radius:8px;padding:8px}
+.holiday-form-error{margin:0;color:#ffb3b3;font-size:13px}
+.holiday-modal-actions{display:flex;justify-content:flex-end;gap:8px}
+/* CP51: the popup is dark green glass like every other popup (shared look in ClmsTheme.css); glass Cancel + white Save, same as the dialogs. */
+.holiday-modal .holiday-modal-actions button{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff}
+.holiday-modal .holiday-modal-actions button:hover{background:rgba(255,255,255,.14)}
+.holiday-modal .holiday-modal-actions button.holiday-primary{background:#fff;border-color:#fff;color:#0a6b4a}
+.holiday-denied{padding:40px;text-align:center;color:#fff}
+@media (max-width:640px){.holiday-card{padding:12px}.holiday-actions button{flex:1}}
+
+.holiday-year-select{display:inline-flex;align-items:center;gap:8px;font-weight:700;margin-left:auto}
+.holiday-year-select select{padding:8px 10px;border-radius:8px;font:inherit}
+.holiday-actions{flex:1;justify-content:flex-start}
+.holiday-card .report-pagination{display:flex!important;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;color:rgba(237,248,242,.8);font-size:12px}
+.holiday-card .report-pagination-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.holiday-card .report-pagination-controls select,.holiday-card .report-pagination-controls button{min-height:34px;padding:7px 10px;border:1px solid rgba(255,255,255,.22);border-radius:8px;background:rgba(255,255,255,.1);color:#fff;font:inherit;font-weight:700}
+.holiday-card .report-pagination-controls button:disabled{opacity:.45;cursor:not-allowed}
+
+/* CP19: toolbar actions and year box on the right; selection buttons top-right. */
+.holiday-actions{flex:0 1 auto;justify-content:flex-end;align-items:center;margin-left:auto}
+.holiday-year-select{margin-left:4px}
+.holiday-year-select input{width:110px;padding:8px 10px;border-radius:8px;border:1px solid rgba(20,80,55,.24);background:#f7fbf8;color:#173b2d;font:inherit;text-align:center}
+.holiday-select-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px;margin:12px 0}
+.holiday-select-actions button{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);color:#fff;border-radius:8px;padding:8px 12px;font:inherit;font-size:13px;cursor:pointer}
+.holiday-select-actions button:hover:not(:disabled){background:rgba(255,255,255,.2)}
+.holiday-select-actions button:disabled{opacity:.45;cursor:not-allowed}
+.holiday-select-actions button.danger{border-color:rgba(255,160,160,.3);background:rgba(180,50,50,.25);color:#ffc9c9}
+.holiday-selected-count{font-size:13px;color:rgba(237,248,242,.85);margin-right:4px}
+.holiday-check-col{width:34px;text-align:center}
+/* CP51: the Date field in the dark Add/Edit popup matches the other dark inputs (the shared DatePicker button is light elsewhere and is unchanged). */
+.holiday-modal .clms-date-trigger{background:#064b36;color:#fff;border-color:rgba(255,255,255,.25)}

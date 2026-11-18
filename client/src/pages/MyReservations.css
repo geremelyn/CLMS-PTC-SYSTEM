@@ -1,0 +1,935 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --my-ink: oklch(98% 0.01 160);
+    --my-ink-soft: oklch(91% 0.02 160);
+    --my-ink-muted: oklch(82% 0.03 160);
+    --my-panel: rgba(255, 255, 255, 0.14);
+    --my-panel-deep: rgba(5, 42, 30, 0.7);
+    --my-input: rgba(3, 24, 16, 0.58);
+    --my-line: rgba(255, 255, 255, 0.28);
+    --my-line-soft: rgba(255, 255, 255, 0.16);
+    --my-green: oklch(58% 0.13 163);
+    --my-green-bright: oklch(72% 0.13 163);
+    --my-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: var(--my-ink);
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
+select {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.my-reservations-page {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    padding: 22px 28px 55px;
+    color: var(--my-ink);
+    background: url('/schoolbg.jpg') center / cover no-repeat;
+    animation: myReservationsFadeIn 0.8s ease-out both;
+}
+
+.my-reservations-overlay {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(120deg, rgba(5, 39, 25, 0.9), rgba(7, 48, 34, 0.78), rgba(8, 22, 17, 0.68));
+}
+
+.my-reservations-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 78px;
+    padding: 12px 22px;
+    border: 1px solid var(--my-line);
+    border-radius: 19px;
+    background: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 15px 40px rgba(6, 24, 16, 0.3);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    animation: myReservationsHeaderIn 0.7s var(--my-ease) both;
+}
+
+.my-reservations-brand,
+.my-reservations-user {
+    display: flex;
+    align-items: center;
+}
+
+.my-reservations-brand {
+    gap: 13px;
+}
+
+.my-reservations-brand img {
+    width: 53px;
+    height: 53px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: oklch(98% 0.01 160);
+    box-shadow: 0 5px 15px rgba(6, 24, 16, 0.25);
+}
+
+.my-reservations-brand h1 {
+    margin: 0;
+    color: var(--my-ink);
+    font-size: 24px;
+    line-height: 1.15;
+    font-weight: 750;
+    letter-spacing: 0.02em;
+}
+
+.my-reservations-brand span,
+.my-reservations-user span {
+    display: block;
+    margin-top: 4px;
+    color: var(--my-ink-soft);
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.my-reservations-user {
+    gap: 10px;
+    padding: 6px 8px 6px 6px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.my-reservations-user strong {
+    color: var(--my-ink);
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.my-reservations-avatar {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: oklch(97% 0.01 160);
+    color: oklch(35% 0.12 305);
+    font-size: 20px;
+}
+
+.my-reservations-layout {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 22px;
+    min-height: calc(100vh - 100px);
+    margin-top: 20px;
+}
+
+.my-reservations- {
+    width: 245px;
+    min-height: 625px;
+    flex-shrink: 0;
+    padding: 24px 15px;
+    border: 1px solid var(--my-line);
+    border-radius: 19px;
+    background: var(--my-panel-deep);
+    box-shadow: 0 15px 40px rgba(6, 24, 16, 0.25);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    animation: myReservationsIn 0.8s var(--my-ease) 0.15s both;
+}
+
+.my-reservations-sidebar {
+    background: rgba(5, 42, 30, 0.85);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.my-reservations-sidebar button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 50px;
+    gap: 12px;
+    margin-bottom: 7px;
+    padding: 0 14px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--my-ink-soft);
+    font-size: 14px;
+    font-weight: 550;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.25s var(--my-ease), background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.my-reservations-sidebar {
+    width: 245px;
+    min-height: 625px;
+    flex-shrink: 0;
+    padding: 24px 15px;
+    border: 1px solid var(--report-line);
+    border-radius: 19px;
+    background: var(--report-panel-deep);
+    box-shadow: 0 15px 40px rgba(6, 24, 16, 0.25);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    animation: reportSidebarIn 0.8s var(--report-ease) 0.15s both;
+}
+
+.my-reservations-sidebar button:hover,
+.my-reservations-sidebar button:focus-visible {
+    transform: translateX(3px);
+    border-color: var(--my-line-soft);
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--my-ink);
+}
+
+.my-reservations-sidebar button.active {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--my-green);
+    box-shadow: 0 8px 20px rgba(6, 24, 16, 0.2);
+    color: var(--my-ink);
+}
+
+.my-reservations-sidebar-line {
+    width: 90%;
+    height: 1px;
+    margin: 24px auto;
+    background: var(--my-line-soft);
+}
+
+.my-reservations-sidebar .logout {
+    color: var(--my-ink-soft);
+}
+
+.my-reservations-sidebar .logout:hover,
+.my-reservations-sidebar .logout:focus-visible {
+    border-color: rgba(255, 160, 160, 0.28);
+    background: rgba(180, 50, 50, 0.3);
+}
+
+.my-reservations-content {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 17px 20px 25px;
+    animation: myReservationsMainIn 0.8s var(--my-ease) 0.2s both;
+}
+
+.my-reservations-heading {
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+.my-reservations-heading > span,
+.my-reservations-card-title > div > span,
+.my-reservations-modal > span {
+    color: var(--my-ink-muted);
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+}
+
+.my-reservations-heading h2 {
+    margin: 7px 0 0;
+    color: var(--my-ink);
+    font-size: clamp(32px, 4vw, 44px);
+    line-height: 1.15;
+    font-weight: 750;
+    text-shadow: 0 4px 18px rgba(6, 24, 16, 0.35);
+    text-wrap: balance;
+}
+
+.my-reservations-heading p {
+    margin: 10px 0 0;
+    color: var(--my-ink-soft);
+    font-size: 16px;
+}
+
+.my-reservations-card {
+    margin-bottom: 22px;
+    padding: 28px;
+    border: 1px solid var(--my-line);
+    border-radius: 20px;
+    background: var(--my-panel);
+    box-shadow: 0 20px 50px rgba(6, 24, 16, 0.18);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
+}
+
+.my-reservations-card-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.my-reservations-card-title h3 {
+    margin: 5px 0 0;
+    color: var(--my-ink);
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 700;
+    text-wrap: balance;
+}
+
+.my-reservations-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.my-reservations-filter-grid > div {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 8px;
+}
+
+.my-reservations-filter-grid label,
+.my-reservations-modal label {
+    color: var(--my-ink-soft);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.my-reservations-filter-grid input,
+.my-reservations-filter-grid select,
+.my-reservations-modal textarea {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 14px;
+    border: 1px solid var(--my-line);
+    border-radius: 10px;
+    outline: none;
+    color: var(--my-ink);
+    background: var(--my-input);
+    font-size: 15px;
+    line-height: 1.4;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.my-reservations-filter-grid input[type="date"] {
+    color-scheme: dark;
+}
+
+.my-reservations-filter-grid input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: brightness(0) invert(1);
+    opacity: 1;
+    cursor: pointer;
+}
+
+.my-reservations-filter-grid input:focus-visible,
+.my-reservations-filter-grid select:focus-visible,
+.my-reservations-modal textarea:focus-visible {
+    border-color: var(--my-green-bright);
+    box-shadow: 0 0 0 3px rgba(21, 145, 104, 0.3);
+}
+
+.my-reservations-filter-grid option {
+    color: oklch(24% 0.03 160);
+    background: oklch(98% 0.01 160);
+}
+
+.my-reservations-clear {
+    min-height: 42px;
+    padding: 0 15px;
+    border: 1px solid var(--my-line);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--my-ink);
+    font-size: 14px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s var(--my-ease);
+}
+
+.my-reservations-clear:hover,
+.my-reservations-clear:focus-visible {
+    transform: translateY(-2px);
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.reservation-count {
+    color: var(--my-ink-soft);
+    font-size: 14px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.my-reservations-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--my-line-soft);
+    border-radius: 13px;
+}
+
+.my-reservations-table {
+    width: 100%;
+    min-width: 920px;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+}
+
+.my-reservations-table th {
+    padding: 15px 16px;
+    background: rgba(3, 24, 16, 0.38);
+    color: var(--my-ink-soft);
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.my-reservations-table td {
+    padding: 16px;
+    border-top: 1px solid var(--my-line-soft);
+    color: var(--my-ink-soft);
+    font-size: 14px;
+    line-height: 1.45;
+    vertical-align: middle;
+}
+
+.my-reservations-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.my-reservations-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.reservation-laboratory,
+.reservation-time {
+    color: var(--my-ink) !important;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.reservation-purpose {
+    max-width: 230px;
+    color: var(--my-ink-soft);
+}
+
+.reservation-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 11px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+.reservation-status.approved {
+    background: rgba(75, 190, 125, 0.24);
+    color: oklch(88% 0.11 160);
+}
+
+.reservation-status.completed {
+    background: rgba(80, 155, 220, 0.24);
+    color: oklch(88% 0.08 240);
+}
+
+.reservation-status.cancelled {
+    background: rgba(220, 80, 80, 0.24);
+    color: oklch(88% 0.09 25);
+}
+
+.reservation-cancel-button {
+    min-height: 38px;
+    padding: 0 13px;
+    border: 1px solid rgba(255, 160, 160, 0.42);
+    border-radius: 8px;
+    background: rgba(180, 50, 50, 0.22);
+    color: oklch(90% 0.08 25);
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: transform 0.2s var(--my-ease), background 0.2s ease;
+}
+
+.reservation-cancel-button:hover,
+.reservation-cancel-button:focus-visible {
+    transform: translateY(-2px);
+    outline: none;
+    background: rgba(200, 60, 60, 0.42);
+}
+
+.my-reservations-empty {
+    padding: 32px !important;
+    color: var(--my-ink-soft) !important;
+    font-size: 14px !important;
+    text-align: center;
+}
+
+.my-reservations-message {
+    position: fixed;
+    z-index: 30;
+    right: 25px;
+    bottom: 25px;
+    max-width: min(440px, calc(100vw - 32px));
+    padding: 15px 19px;
+    border: 1px solid var(--my-line);
+    border-radius: 11px;
+    background: rgba(20, 35, 27, 0.96);
+    box-shadow: 0 15px 40px rgba(6, 24, 16, 0.3);
+    backdrop-filter: blur(15px);
+    color: var(--my-ink);
+    font-size: 14px;
+    line-height: 1.45;
+    animation: myReservationsMainIn 0.3s var(--my-ease) both;
+}
+
+.my-reservations-message.success {
+    border-color: rgba(130, 231, 190, 0.55);
+}
+
+.my-reservations-message.error {
+    border-color: rgba(255, 160, 160, 0.6);
+}
+
+.my-reservations-modal-bg {
+    position: fixed;
+    z-index: 50;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(3, 14, 9, 0.72);
+    backdrop-filter: blur(7px);
+}
+
+.my-reservations-modal {
+    position: relative;
+    width: min(500px, 100%);
+    padding: 32px;
+    border: 1px solid var(--my-line);
+    border-radius: 20px;
+    background: rgba(24, 45, 34, 0.98);
+    box-shadow: 0 30px 70px rgba(3, 14, 9, 0.45);
+    color: var(--my-ink);
+    animation: myReservationsModalIn 0.3s var(--my-ease) both;
+}
+
+.my-reservations-modal h2 {
+    margin: 8px 0 16px;
+    color: var(--my-ink);
+    font-size: 28px;
+    line-height: 1.2;
+    text-wrap: balance;
+}
+
+.my-reservations-summary {
+    padding: 16px;
+    border: 1px solid var(--my-line-soft);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.my-reservations-summary p {
+    margin: 7px 0;
+    color: var(--my-ink-soft);
+    font-size: 15px;
+}
+
+.my-reservations-summary strong {
+    color: var(--my-ink);
+}
+
+.my-reservations-modal form {
+    margin-top: 24px;
+}
+
+.my-reservations-modal label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.my-reservations-modal textarea {
+    display: block;
+    min-height: 110px;
+    padding: 13px 14px;
+    resize: vertical;
+}
+
+.my-reservations-modal-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.my-reservations-confirm-button,
+.my-reservations-cancel-button {
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: transform 0.25s var(--my-ease), background 0.25s ease;
+}
+
+.my-reservations-confirm-button {
+    border: 1px solid rgba(255, 160, 160, 0.45);
+    background: rgba(180, 50, 50, 0.76);
+    color: var(--my-ink);
+}
+
+.my-reservations-confirm-button:hover,
+.my-reservations-confirm-button:focus-visible {
+    transform: translateY(-2px);
+    outline: none;
+    background: rgba(205, 60, 60, 0.92);
+}
+
+.my-reservations-cancel-button {
+    border: 1px solid var(--my-line);
+    background: rgba(255, 255, 255, 0.11);
+    color: var(--my-ink);
+}
+
+.my-reservations-cancel-button:hover,
+.my-reservations-cancel-button:focus-visible {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.my-reservations-close-modal {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--my-ink);
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.my-reservations-close-modal:hover,
+.my-reservations-close-modal:focus-visible {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+@keyframes myReservationsFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes myReservationsHeaderIn {
+    from { opacity: 0; transform: translateY(-25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes myReservationsSidebarIn {
+    from { opacity: 0; transform: translateX(-35px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes myReservationsMainIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes myReservationsModalIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 1100px) {
+    .my-reservations-page {
+        padding: 18px 20px 50px;
+    }
+
+    .my-reservations-layout {
+        gap: 15px;
+    }
+
+    .my-reservations-sidebar {
+        width: 205px;
+    }
+
+    .my-reservations-content {
+        padding: 15px 10px;
+    }
+
+    .my-reservations-filter-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .my-reservations-layout {
+        flex-direction: column;
+    }
+
+    .my-reservations-sidebar {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        min-height: auto;
+        gap: 7px;
+        padding: 14px;
+    }
+
+    .my-reservations-sidebar p,
+    .my-reservations-sidebar-line {
+        display: none;
+    }
+
+    .my-reservations-sidebar button {
+        flex: 1 1 150px;
+        justify-content: center;
+        min-height: 48px;
+        margin: 0;
+    }
+
+    .my-reservations-content {
+        padding: 10px 0;
+    }
+
+    .my-reservations-filter-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .my-reservations-page {
+        padding: 12px 12px 45px;
+    }
+
+    .my-reservations-header {
+        padding: 10px 13px;
+    }
+
+    .my-reservations-brand img {
+        width: 43px;
+        height: 43px;
+    }
+
+    .my-reservations-brand h1 {
+        font-size: 21px;
+    }
+
+    .my-reservations-brand span,
+    .my-reservations-user-info {
+        display: none;
+    }
+
+    .my-reservations-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .my-reservations-sidebar {
+        padding: 9px;
+    }
+
+    .my-reservations-sidebar button {
+        min-height: 46px;
+        padding: 0 8px;
+        font-size: 13px;
+    }
+
+    .my-reservations-heading h2 {
+        font-size: 34px;
+    }
+
+    .my-reservations-heading p {
+        font-size: 15px;
+    }
+
+    .my-reservations-card,
+    .my-reservations-modal {
+        padding: 20px;
+    }
+
+    .my-reservations-card-title {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .my-reservations-clear {
+        width: 100%;
+    }
+
+    .my-reservations-filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .my-reservations-message {
+        right: 16px;
+        bottom: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .my-reservations-page,
+    .my-reservations-header,
+    .my-reservations-sidebar,
+    .my-reservations-content,
+    .my-reservations-message,
+    .my-reservations-modal {
+        animation: none;
+    }
+
+    .my-reservations-sidebar button,
+    .my-reservations-clear,
+    .reservation-cancel-button,
+    .my-reservations-confirm-button,
+    .my-reservations-cancel-button {
+        transition: none;
+    }
+}
+.my-reservations-cancel-warning{margin:0 0 16px;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.06);line-height:1.5}
+
+
+/* ===== Column header dropdown filters ===== */
+.my-reservations-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.my-reservations-sort {
+    min-height: 42px;
+    padding: 0 12px;
+    border: 1px solid var(--my-line);
+    border-radius: 10px;
+    color: var(--my-ink);
+    background: var(--my-input);
+    outline: none;
+    cursor: pointer;
+}
+
+.my-reservations-table th {
+    vertical-align: top;
+}
+
+.th-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.th-filter select {
+    width: 100%;
+    min-width: 110px;
+    max-width: 220px;
+    min-height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--my-line);
+    border-radius: 8px;
+    outline: none;
+    color: var(--my-ink);
+    background: var(--my-input);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: normal;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.th-filter select:focus-visible,
+.my-reservations-sort:focus-visible {
+    border-color: var(--my-green-bright);
+    box-shadow: 0 0 0 3px rgba(21, 145, 104, 0.3);
+}
+
+.th-filter option,
+.my-reservations-sort option {
+    color: oklch(24% 0.03 160);
+    background: oklch(98% 0.01 160);
+}
+
+/* ===== Cancellation note ===== */
+.reservation-cancel-note {
+    margin: 8px 0 0;
+    max-width: 240px;
+    color: var(--my-ink-muted);
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.my-reservations-modal textarea {
+    width: 100%;
+    color: var(--my-ink);
+    background: var(--my-input);
+    border: 1px solid var(--my-line);
+    border-radius: 10px;
+    outline: none;
+}
+
+.my-reservations-note-count {
+    display: block;
+    margin: 6px 0 14px;
+    color: var(--my-ink-muted);
+    font-size: 12px;
+    text-align: right;
+}
+.my-reservations-search-title{display:block!important}.my-reservations-search-title .my-reservations-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;width:100%}.my-reservations-search-title label{font-size:12px;font-weight:800}.my-reservations-search-title input{flex:1;min-width:240px;padding:10px 12px;border-radius:9px}.my-reservations-pagination{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;padding:12px 0;font-size:12px}.my-reservations-pagination select,.my-reservations-pagination button{padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#064b36;color:#fff}.my-reservations-pagination button{cursor:pointer}.my-reservations-pagination button:disabled{opacity:.45;cursor:not-allowed}
+
+/* CP58: the cancellation note (Dean / Teacher My Reservations) is centered; the holiday-conflict note is not a cancellation note and is unchanged. */
+.reservation-cancel-note.reservation-cancel-note-centered { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* CP148: larger, more readable My Reservations table (Dean / Teacher), closer to the roomy Reserve Laboratory screen. */
+.clms-app-shell .my-reservations-content .my-reservations-table{min-width:960px}
+.clms-app-shell .my-reservations-content .my-reservations-table th{padding:18px 16px !important;font-size:13px !important}
+.clms-app-shell .my-reservations-content .my-reservations-table td{padding:22px 16px !important;font-size:16px;line-height:1.5}
+.clms-app-shell .my-reservations-content .my-reservations-table td small{display:block;margin-top:4px;font-size:14px;line-height:1.5}
+.clms-app-shell .my-reservations-content .my-reservations-table .reservation-purpose{max-width:300px}
+.clms-app-shell .my-reservations-content .my-reservations-table .reservation-status{min-height:36px;padding:0 14px;font-size:15px}
+.clms-app-shell .my-reservations-content .my-reservations-table .reservation-cancel-button{min-height:42px;padding:0 16px;font-size:15px;white-space:nowrap}
+@media (max-width:760px){
+  .clms-app-shell .my-reservations-content .my-reservations-table{min-width:880px}
+  .clms-app-shell .my-reservations-content .my-reservations-table th{padding:14px 14px !important}
+  .clms-app-shell .my-reservations-content .my-reservations-table td{padding:16px 14px !important;font-size:15px}
+  .clms-app-shell .my-reservations-content .my-reservations-table td small{font-size:13px}
+}
