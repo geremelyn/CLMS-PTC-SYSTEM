@@ -1,0 +1,27 @@
+const test = require('node:test')
+const assert = require('node:assert/strict')
+const { computePeriodAvailability, resolvePeriod, RESERVATION_PERIODS } = require('../config/reservationPeriods.js')
+const base = { labFrom: '08:00:00', labUntil: '17:00:00', date: '2027-03-01', today: '2027-02-01', nowMinutes: 600 }
+const state = blocking => Object.fromEntries(computePeriodAvailability({ ...base, blocking }).map(p => [p.period, p.available]))
+test('confirmed period times', () => {
+  assert.deepEqual([RESERVATION_PERIODS.MORNING.start, RESERVATION_PERIODS.MORNING.end], ['08:00:00', '12:00:00'])
+  assert.deepEqual([RESERVATION_PERIODS.AFTERNOON.start, RESERVATION_PERIODS.AFTERNOON.end], ['12:00:00', '17:00:00'])
+  assert.equal(resolvePeriod('morning').key, 'MORNING'); assert.equal(resolvePeriod('x'), null); assert.equal(resolvePeriod(null), null)
+})
+test('both available when nothing booked', () => assert.deepEqual(state([]), { MORNING: true, AFTERNOON: true }))
+test('exact Morning booking blocks only Morning', () => assert.deepEqual(state([{ start_time: '08:00:00', end_time: '12:00:00' }]), { MORNING: false, AFTERNOON: true }))
+test('exact Afternoon booking blocks only Afternoon', () => assert.deepEqual(state([{ start_time: '12:00:00', end_time: '17:00:00' }]), { MORNING: true, AFTERNOON: false }))
+test('both booked blocks both', () => assert.deepEqual(state([{ start_time: '08:00:00', end_time: '12:00:00' }, { start_time: '12:00:00', end_time: '17:00:00' }]), { MORNING: false, AFTERNOON: false }))
+test('legacy overlaps: partial morning, partial afternoon, crossing noon, full day, back-to-back edges', () => {
+  assert.deepEqual(state([{ start_time: '09:15:00', end_time: '10:45:00' }]), { MORNING: false, AFTERNOON: true })
+  assert.deepEqual(state([{ start_time: '13:00:00', end_time: '14:30:00' }]), { MORNING: true, AFTERNOON: false })
+  assert.deepEqual(state([{ start_time: '11:30:00', end_time: '12:30:00' }]), { MORNING: false, AFTERNOON: false }, 'crossing noon blocks both')
+  assert.deepEqual(state([{ start_time: '08:00:00', end_time: '17:00:00' }]), { MORNING: false, AFTERNOON: false })
+  assert.deepEqual(state([{ start_time: '07:00:00', end_time: '08:00:00' }]), { MORNING: true, AFTERNOON: true }, 'ends exactly when Morning starts')
+  assert.deepEqual(state([{ start_time: '12:00:00', end_time: '13:00:00' }]), { MORNING: true, AFTERNOON: false }, 'starts exactly when Morning ends')
+})
+test('lab hours, closed date and already-started today', () => {
+  const r = computePeriodAvailability({ ...base, labFrom: '12:00:00' }); assert.equal(r[0].reason, 'OUTSIDE_LAB_HOURS'); assert.equal(r[1].available, true)
+  assert.ok(computePeriodAvailability({ ...base, closedReason: 'HOLIDAY' }).every(p => p.reason === 'HOLIDAY'))
+  const t = computePeriodAvailability({ ...base, date: '2027-02-01', nowMinutes: 9 * 60 }); assert.equal(t[0].reason, 'ALREADY_STARTED'); assert.equal(t[1].available, true)
+})

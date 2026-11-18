@@ -1,0 +1,20 @@
+const test = require('node:test')
+const assert = require('node:assert/strict')
+
+test('reservation report combines date/time and requester role/program without exposing internal row ID', async () => {
+  const { makeReportViewRows } = await import('../../client/src/utils/reportFormatting.mjs')
+  const [row] = makeReportViewRows([{ id: 9, laboratory_name: 'Lab A', reservation_date: '2026-10-27T00:00:00.000Z', start_time: '09:00:00', end_time: '10:00:00', reserved_by: 'A. User', reserved_by_username: '2026001', reserved_by_role: 'Teacher', reserved_by_program: 'BSIT', status: 'APPROVED' }], 'reservations')
+  assert.equal(row['Reservation Date & Time'], '2026-10-27 09:00–10:00')
+  assert.equal(row['Reserved By'], 'ID: 2026001 · A. User · BSIT · BSIT-Teacher')
+  assert.equal('id' in row, false)
+  assert.equal('reservation_date' in row, false)
+})
+test('inventory report combines asset tag and serial, and account report labels the username as ID Number', async () => {
+  const { makeReportViewRows, displayReportColumn } = await import('../../client/src/utils/reportFormatting.mjs')
+  const [inventory] = makeReportViewRows([{ id: 4, asset_type: 'COMPUTER', asset_tag: 'TAG-1', serial_number: 'SN-1', asset_name: 'PC-1' }], 'inventory')
+  assert.equal(inventory['Asset Tag / Serial Number'], 'TAG-1 / SN-1')
+  const [account] = makeReportViewRows([{ id: 7, username: '2026001', full_name: 'A. User', role: 'Inventory Staff' }], 'user-accounts')
+  assert.equal(account['ID Number'], '2026001')
+  assert.equal(account.role, 'MIS Staff')
+  assert.equal(displayReportColumn('reservation_date'), 'Reservation Date')
+})

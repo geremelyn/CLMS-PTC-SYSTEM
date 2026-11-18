@@ -1,0 +1,16 @@
+const express = require('express')
+const router = express.Router()
+const { requireRole } = require('../middleware/roleAuth.js')
+const { getReservations, createReservation, decideReservation, cancelReservation, undoCancelReservation, undoDecisionReservation, undoCreateReservation, getPeriodAvailability } = require('../controllers/reservationController.js')
+router.get('/', requireRole('MIS','Dean','Teacher','Inventory Staff','Others'), getReservations)
+router.get('/availability', requireRole('MIS','Dean','Teacher','Others'), getPeriodAvailability)
+router.post('/', requireRole('MIS','Dean','Teacher','Others'), createReservation)
+router.put('/:id/decision', requireRole('MIS','Inventory Staff'), decideReservation)
+router.put('/:id/undo-decision', requireRole('MIS','Inventory Staff'), undoDecisionReservation)
+router.put('/:id/undo-create', requireRole('MIS','Dean','Teacher','Others'), undoCreateReservation)
+router.put('/:id/cancel', requireRole('MIS','Dean','Teacher','Others'), cancelReservation)
+router.put('/:id/cancel-own', requireRole('Dean','Teacher','Others'), cancelReservation)
+router.put('/:id/undo-cancel', requireRole('MIS','Dean','Teacher','Others'), undoCancelReservation)
+// MIS only. Deleted reservations go to the Recycle Bin (restorable at any time); there is no 10-minute undo window.
+router.post('/bulk-delete', requireRole('MIS'), require('../controllers/recycleBinController.js').deleteReservations)
+module.exports = router
